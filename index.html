@@ -3,99 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light">
+<meta name="color-scheme" content="dark">
 <title>CaveRoboticsLab — Una robotica umanistica</title>
 <meta name="description" content="CaveRoboticsLab APS: laboratorio no-profit per una robotica umanistica. Tecnologia al servizio delle persone, della conoscenza e del Pianeta.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="CaveRoboticsLab — Una robotica umanistica">
+<meta property="og:description" content="Laboratorio no-profit per una robotica umanistica. Tecnologia al servizio delle persone, della conoscenza e del Pianeta.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
   :root{
-    --night:#0A0F1E;
-    --night-2:#0E162B;
-    --night-3:#122039;
-    --cave:#1E3A5F;
-    --steel:#4A9EFF;
-    --steel-light:#7EB8F7;
-    --steel-ink:#1E4E8C;
-    --glow:#F4B860;
-    --glow-soft:#F7CD8C;
-    --light:#EEF2F8;
-    --light-2:#E2E9F3;
-    --ink:#0E1A2E;
-    --ink-soft:#46556B;
-    --line:rgba(14,26,46,0.13);
-    --line-2:rgba(14,26,46,0.07);
-    --line-d:rgba(126,184,247,0.18);
-    --maxw:1200px;
-    --r:18px;
+    /* Palette Dark Tech - Ispirata ai terminali ingegneristici e dashboard finanziarie */
+    --night: #050811;        /* Sfondo principale profondo per l'effetto "Caverna" */
+    --night-2: #0B1120;      /* Colore delle card e dei blocchi di contrasto */
+    --night-3: #121B2E;      /* Highlights interni */
+    --cave: #1E3A5F;
+    --steel: #3A8BFF;        /* Blu elettrico hi-tech per elementi attivi */
+    --steel-light: #7EB8F7;
+    --steel-ink: #1E4E8C;
+    --glow: #F4B860;         /* L'ambra dorata che rappresenta la luce della conoscenza */
+    --glow-soft: #F7CD8C;
+    
+    /* Inversione di contrasto: il testo diventa chiaro su sfondo scuro */
+    --light: #0A0F1E;        
+    --light-2: #0F172A;      /* Grigio ardesia scuro per sezioni alternate */
+    --ink: #F1F5F9;          /* Bianco titanio per la massima leggibilità */
+    --ink-soft: #94A3B8;     /* Grigio tech per testi secondari */
+    
+    /* Griglia geometrica che ricorda i blueprint CAD o i grafici Quant */
+    --line: rgba(255, 255, 255, 0.08);
+    --line-2: rgba(255, 255, 255, 0.04);
+    --line-d: rgba(58, 139, 255, 0.2);
+    --maxw: 1200px;
+    --r: 18px;
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
-    background:var(--light);
+    background:var(--night);
     color:var(--ink);
     font-family:'Inter',system-ui,sans-serif;
     font-size:17px;line-height:1.6;
     -webkit-font-smoothing:antialiased;overflow-x:hidden;
+    /* Micro-griglia di sfondo */
+    background-image: linear-gradient(var(--line-2) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--line-2) 1px, transparent 1px);
+    background-size: 40px 40px;
   }
   ::selection{background:var(--glow);color:var(--night)}
   a{color:inherit;text-decoration:none}
   img,svg{display:block;max-width:100%}
 
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-
   .mono{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase}
-
-  h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:700;line-height:1.04;letter-spacing:-0.02em}
+  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;font-weight:700;line-height:1.04;letter-spacing:-0.02em}
 
   /* ---------- NAV ---------- */
   header{
     position:sticky;top:0;z-index:50;
-    background:color-mix(in srgb, var(--light) 88%, transparent);
-    backdrop-filter:blur(10px);border-bottom:1px solid var(--line-2);
+    background:color-mix(in srgb, var(--night) 85%, transparent);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
   }
   .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
-  .brand{display:flex;align-items:center;gap:12px;font-family:'Space Grotesk';font-weight:700;font-size:1.15rem;letter-spacing:-0.01em}
+  .brand{display:flex;align-items:center;gap:12px;font-family:'Space Grotesk';font-weight:700;font-size:1.15rem;letter-spacing:-0.01em;color:var(--ink)}
   .brand .mark{width:34px;height:34px;flex:none}
   .nav-links{display:flex;gap:30px;align-items:center}
   .nav-links a{font-size:.93rem;font-weight:500;color:var(--ink-soft);transition:color .2s}
-  .nav-links a:hover{color:var(--steel-ink)}
+  .nav-links a:hover{color:var(--steel-light)}
   .nav-links a.nav-cta{
-    background:var(--night);color:#fff;padding:11px 20px;border-radius:100px;
+    background:var(--ink);color:var(--night);padding:11px 20px;border-radius:100px;
     font-size:.9rem;font-weight:600;transition:background .2s,transform .2s;
   }
-  .nav-links a.nav-cta:hover{background:var(--steel-ink);color:#fff;transform:translateY(-1px)}
+  .nav-links a.nav-cta:hover{background:var(--glow);color:var(--night);transform:translateY(-1px)}
   .burger{display:none;background:none;border:none;cursor:pointer;width:40px;height:40px;color:var(--ink)}
 
   /* ---------- HERO ---------- */
   .hero{padding:64px 0 80px}
   .hero-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:54px;align-items:center}
-  .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--steel-ink);margin-bottom:24px}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--steel-light);margin-bottom:24px}
   .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--glow);box-shadow:0 0 0 4px rgba(244,184,96,.25)}
   .hero h1{font-size:clamp(2.8rem,6.4vw,4.7rem);font-weight:700}
-  .hero h1 .lit{color:var(--steel-ink);position:relative}
+  .hero h1 .lit{color:var(--glow);position:relative}
   .hero .subhead{font-family:'Space Grotesk';font-weight:500;font-size:clamp(1.1rem,2vw,1.4rem);color:var(--ink);margin-top:16px;letter-spacing:-0.01em}
   .hero p.lead{font-size:1.1rem;color:var(--ink-soft);margin-top:22px;max-width:40ch}
   .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+  
   .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:100px;font-weight:600;font-size:1rem;transition:transform .2s,background .2s,box-shadow .2s,border-color .2s,color .2s;cursor:pointer;border:none}
-  .btn-primary{background:var(--night);color:var(--light)}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 32px -14px rgba(10,15,30,.6)}
+  .btn-primary{background:var(--ink);color:var(--night)}
+  .btn-primary:hover{transform:translateY(-2px);background:var(--glow);box-shadow:0 14px 32px -14px rgba(244,184,96,.4)}
   .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
-  .btn-ghost:hover{border-color:var(--steel-ink);color:var(--steel-ink)}
+  .btn-ghost:hover{border-color:var(--steel-light);color:var(--steel-light);background:var(--line-2)}
   .btn .arr{transition:transform .2s}
   .btn:hover .arr{transform:translate(3px,-3px)}
+  
   .facts{display:flex;gap:30px;margin-top:44px;flex-wrap:wrap}
   .fact{display:flex;flex-direction:column;gap:3px}
   .fact b{font-family:'Space Grotesk';font-size:1.02rem;color:var(--ink);font-weight:600}
   .fact span{color:var(--ink-soft);font-size:.83rem}
 
-  /* hero panel : Plato's cave scene */
+  /* Hero Panel */
   .panel{
-    background:radial-gradient(120% 100% at 50% 8%, #16233f 0%, var(--night) 55%, #070b16 100%);
+    background:radial-gradient(120% 100% at 50% 8%, #16233f 0%, var(--night-2) 55%, #050811 100%);
     border-radius:24px;aspect-ratio:5/6;position:relative;overflow:hidden;
-    box-shadow:0 44px 90px -44px rgba(10,15,30,.75);border:1px solid var(--night-3);
+    box-shadow:0 44px 90px -44px rgba(5,8,17,.75);border:1px solid var(--line);
   }
   .panel .ptag{position:absolute;top:18px;left:20px;color:rgba(126,184,247,.55);z-index:5}
   .panel .pcoord{position:absolute;bottom:18px;right:20px;color:rgba(244,184,96,.6);z-index:5}
@@ -105,7 +120,7 @@
   .glowfill{opacity:0}
   .archline{fill:none;stroke:var(--steel);stroke-width:1.6;stroke-opacity:.5}
   .rock{fill:var(--cave)}
-  .robot-body{fill:#070b16;stroke:var(--steel-light);stroke-width:1.4;stroke-opacity:.7}
+  .robot-body{fill:#050811;stroke:var(--steel-light);stroke-width:1.4;stroke-opacity:.7}
   .robot-eye{fill:var(--glow);filter:drop-shadow(0 0 4px var(--glow))}
 
   .reveal-cave .glowfill{animation:glowin 1.6s ease forwards}
@@ -129,69 +144,69 @@
   .sec-head p{color:var(--ink-soft);margin-top:18px;font-size:1.06rem}
 
   /* ---------- MANIFESTO ---------- */
-  .manifesto{background:var(--night);color:var(--light);position:relative;overflow:hidden}
+  .manifesto{background:var(--night-2);color:var(--ink);position:relative;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .manifesto::before{content:"";position:absolute;top:-30%;right:-10%;width:520px;height:520px;border-radius:50%;
-    background:radial-gradient(circle, rgba(244,184,96,.16), transparent 65%);pointer-events:none}
+    background:radial-gradient(circle, rgba(244,184,96,.1), transparent 65%);pointer-events:none}
   .manifesto-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:start;position:relative}
   .manifesto .eyebrow{color:var(--steel-light)}
   .manifesto .quote{font-family:'Space Grotesk';font-weight:600;font-size:clamp(1.7rem,3.6vw,2.7rem);line-height:1.16;letter-spacing:-0.02em;max-width:20ch;margin-top:18px}
   .manifesto .quote .hl{color:var(--glow)}
-  .manifesto .body{color:rgba(238,242,248,.8);font-size:1.05rem}
+  .manifesto .body{color:var(--ink-soft);font-size:1.05rem}
   .manifesto .body p+p{margin-top:18px}
 
-  /* ---------- VALUES ---------- */
+  /* ---------- VALUES (Bento Grid Style) ---------- */
   .values-grid{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
   .value{padding:38px 36px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:background .25s}
-  .value:hover{background:var(--light-2)}
-  .value .vnum{color:var(--steel-ink);margin-bottom:22px}
+  .value:hover{background:var(--night-2)}
+  .value .vnum{color:var(--steel-light);margin-bottom:22px;font-weight:700}
   .value h3{font-size:1.4rem;margin-bottom:10px}
   .value p{color:var(--ink-soft);font-size:.98rem}
 
   /* ---------- ACTIVITIES ---------- */
   .acts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .card{background:var(--light);border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;transition:transform .25s,box-shadow .25s,border-color .25s;display:flex;flex-direction:column;gap:14px}
-  .card:hover{transform:translateY(-4px);box-shadow:0 24px 46px -26px rgba(14,26,46,.35);border-color:transparent}
-  .card .ic{width:46px;height:46px;border-radius:12px;background:var(--night);color:var(--steel-light);display:flex;align-items:center;justify-content:center;flex:none}
-  .card .tag{color:var(--steel-ink)}
+  .card{background:var(--night-2);border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;transition:transform .25s,box-shadow .25s,border-color .25s;display:flex;flex-direction:column;gap:14px}
+  .card:hover{transform:translateY(-4px);box-shadow:0 24px 46px -26px rgba(0,0,0,.5);border-color:var(--steel)}
+  .card .ic{width:46px;height:46px;border-radius:12px;background:var(--night-3);color:var(--steel-light);display:flex;align-items:center;justify-content:center;flex:none;border:1px solid var(--line)}
+  .card .tag{color:var(--steel-light)}
   .card h3{font-size:1.26rem}
   .card p{color:var(--ink-soft);font-size:.95rem}
 
   /* ---------- IMPACT ---------- */
-  .impact{background:var(--night-2);color:var(--light)}
+  .impact{background:var(--night-3);color:var(--ink);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
-  .impact .stat{border-left:2px solid var(--line-d);padding-left:18px}
+  .impact .stat{border-left:2px solid var(--steel);padding-left:18px}
   .impact .stat b{display:block;font-family:'Space Grotesk';font-weight:700;font-size:clamp(2rem,4vw,3rem);line-height:1;color:var(--glow)}
-  .impact .stat span{font-size:.92rem;font-weight:500;margin-top:8px;display:block;color:rgba(238,242,248,.78)}
+  .impact .stat span{font-size:.92rem;font-weight:500;margin-top:8px;display:block;color:var(--ink-soft)}
 
   /* ---------- JOIN ---------- */
   .join-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
   .join .sec-head{margin-bottom:30px}
   .pathways{display:flex;flex-direction:column;gap:14px}
-  .pathway{display:flex;gap:18px;align-items:flex-start;padding:22px 24px;border:1px solid var(--line);border-radius:var(--r);background:var(--light);transition:border-color .2s,transform .2s}
-  .pathway:hover{border-color:var(--steel-ink);transform:translateX(4px)}
-  .pathway .pn{font-family:'Space Mono';color:var(--steel-ink);font-weight:700;font-size:1.05rem;flex:none}
+  .pathway{display:flex;gap:18px;align-items:flex-start;padding:22px 24px;border:1px solid var(--line);border-radius:var(--r);background:var(--night-2);transition:border-color .2s,transform .2s}
+  .pathway:hover{border-color:var(--steel);transform:translateX(4px)}
+  .pathway .pn{font-family:'Space Mono';color:var(--steel-light);font-weight:700;font-size:1.05rem;flex:none}
   .pathway h4{font-family:'Space Grotesk';font-size:1.1rem;margin-bottom:4px;font-weight:600}
   .pathway p{color:var(--ink-soft);font-size:.93rem}
-  .join-card{background:radial-gradient(120% 120% at 80% 0%, #16233f, var(--night) 60%);color:var(--light);border-radius:24px;padding:44px 40px;border:1px solid var(--night-3)}
+  
+  .join-card{background:radial-gradient(120% 120% at 80% 0%, #16233f, var(--night) 60%);color:var(--ink);border-radius:24px;padding:44px 40px;border:1px solid var(--line)}
   .join-card .eyebrow{color:var(--steel-light)}
   .join-card h3{font-size:1.85rem;margin:14px 0 12px}
-  .join-card p{color:rgba(238,242,248,.8);margin-bottom:26px}
+  .join-card p{color:var(--ink-soft);margin-bottom:26px}
   .join-card .btn-primary{background:var(--glow);color:var(--night);width:100%;justify-content:center}
-  .join-card .btn-primary:hover{box-shadow:0 14px 32px -14px rgba(244,184,96,.6)}
-  .join-card .note{margin-top:18px;font-size:.82rem;color:rgba(238,242,248,.55)}
+  .join-card .btn-primary:hover{box-shadow:0 14px 32px -14px rgba(244,184,96,.6);background:var(--ink)}
+  .join-card .note{margin-top:18px;font-size:.82rem;color:rgba(255,255,255,0.4)}
 
   /* ---------- FOOTER ---------- */
-  footer{background:var(--night);color:rgba(238,242,248,.7);padding:70px 0 36px}
-  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px}
-  footer .brand{color:var(--light);margin-bottom:14px}
+  footer{background:var(--night-2);color:var(--ink-soft);padding:70px 0 36px;border-top:1px solid var(--line)}
+  footer .brand{color:var(--ink);margin-bottom:14px}
   footer .desc{max-width:40ch;font-size:.95rem}
   footer .motto{margin-top:14px;color:var(--glow)}
-  .foot-col h5{font-family:'Space Grotesk';color:var(--light);font-size:1rem;margin-bottom:14px;font-weight:600}
+  .foot-col h5{font-family:'Space Grotesk';color:var(--ink);font-size:1rem;margin-bottom:14px;font-weight:600}
   .foot-col a,.foot-col p{display:block;font-size:.92rem;margin-bottom:9px;transition:color .2s}
   .foot-col a:hover{color:var(--steel-light)}
-  .foot-bottom{margin-top:54px;padding-top:24px;border-top:1px solid var(--line-d);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:.82rem;color:rgba(238,242,248,.5)}
+  .foot-bottom{margin-top:54px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:.82rem;color:rgba(255,255,255,0.3)}
 
-  /* ---------- REVEAL ---------- */
+  /* ---------- REVEAL ANIMATIONS ---------- */
   .rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
   .rv.in{opacity:1;transform:none}
 
@@ -203,11 +218,10 @@
     .impact-grid{grid-template-columns:repeat(2,1fr);gap:34px}
   }
   @media(max-width:680px){
-    body{font-size:16px}
-    .nav-links{position:fixed;inset:74px 0 auto 0;background:var(--light);flex-direction:column;gap:0;padding:8px 0;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:transform .3s;align-items:stretch}
+    .nav-links{position:fixed;inset:74px 0 auto 0;background:var(--night-2);flex-direction:column;gap:0;padding:8px 0;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:transform .3s;align-items:stretch;max-height: calc(100vh - 74px); overflow-y: auto;}
     .nav-links.open{transform:none}
-    .nav-links a{padding:15px 28px;border-bottom:1px solid var(--line-2)}
-    .nav-links a.nav-cta{margin:12px 28px;text-align:center}
+    .nav-links a{padding:15px 28px;border-bottom:1px solid var(--line)}
+    .nav-links a.nav-cta{margin:12px 28px;text-align:center;background:var(--ink);color:var(--night)}
     .burger{display:flex;align-items:center;justify-content:center}
     section{padding:72px 0}
     .values-grid,.acts{grid-template-columns:1fr}
@@ -223,7 +237,6 @@
 </head>
 <body>
 
-<!-- ===== LOGO MARK (reusable cave + light + robot) ===== -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <radialGradient id="markGlow" cx="50%" cy="32%" r="62%">
@@ -231,10 +244,15 @@
       <stop offset="45%" stop-color="#F4B860"/>
       <stop offset="100%" stop-color="#0E162B" stop-opacity="0"/>
     </radialGradient>
+    <radialGradient id="heroGlow" cx="50%" cy="26%" r="68%">
+      <stop offset="0%" stop-color="#FBE3B4"/>
+      <stop offset="35%" stop-color="#F4B860"/>
+      <stop offset="78%" stop-color="#9A6A24" stop-opacity=".35"/>
+      <stop offset="100%" stop-color="#0A0F1E" stop-opacity="0"/>
+    </radialGradient>
   </defs>
 </svg>
 
-<!-- NAV -->
 <header>
   <div class="wrap nav">
     <a href="#top" class="brand" aria-label="CaveRoboticsLab home">
@@ -262,7 +280,6 @@
   </div>
 </header>
 
-<!-- HERO -->
 <a id="top"></a>
 <section class="hero">
   <div class="wrap hero-grid">
@@ -284,12 +301,10 @@
       </div>
     </div>
 
-    <!-- CAVE SCENE -->
     <div class="panel" id="panel">
       <span class="ptag mono">// allegoria.caverna</span>
       <span class="pcoord mono">ombra → luce</span>
       <svg viewBox="0 0 400 480" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        <!-- light rays beyond the arch -->
         <g class="breathe">
           <line class="ray r1" x1="200" y1="150" x2="200" y2="40"/>
           <line class="ray r2" x1="200" y1="150" x2="120" y2="70"/>
@@ -299,27 +314,15 @@
           <line class="ray r6" x1="200" y1="160" x2="40" y2="180"/>
           <line class="ray r6" x1="200" y1="160" x2="360" y2="180"/>
         </g>
-        <!-- the cave opening, filled with light -->
         <path class="glowfill breathe" d="M120 380 V210 Q120 120 200 120 Q280 120 280 210 V380 Z"
               fill="url(#heroGlow)"/>
-        <defs>
-          <radialGradient id="heroGlow" cx="50%" cy="26%" r="68%">
-            <stop offset="0%" stop-color="#FBE3B4"/>
-            <stop offset="35%" stop-color="#F4B860"/>
-            <stop offset="78%" stop-color="#9A6A24" stop-opacity=".35"/>
-            <stop offset="100%" stop-color="#0A0F1E" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <!-- arch rim -->
         <path class="archline" d="M120 380 V210 Q120 120 200 120 Q280 120 280 210 V380"/>
-        <!-- rock texture -->
         <circle class="rock" cx="128" cy="240" r="2" opacity=".6"/>
         <circle class="rock" cx="123" cy="280" r="1.5" opacity=".5"/>
         <circle class="rock" cx="130" cy="320" r="1.8" opacity=".4"/>
         <circle class="rock" cx="272" cy="245" r="2" opacity=".6"/>
         <circle class="rock" cx="277" cy="285" r="1.5" opacity=".5"/>
         <circle class="rock" cx="270" cy="325" r="1.8" opacity=".4"/>
-        <!-- the freed one: a small robot facing the light -->
         <g class="robot float">
           <line class="robot-body" x1="200" y1="300" x2="200" y2="290"/>
           <circle cx="200" cy="287" r="2.4" fill="#F4B860"/>
@@ -329,14 +332,12 @@
           <line class="robot-body" x1="186" y1="334" x2="176" y2="350"/>
           <line class="robot-body" x1="214" y1="334" x2="224" y2="350"/>
         </g>
-        <!-- floor line -->
         <line x1="130" y1="380" x2="270" y2="380" stroke="#4A9EFF" stroke-width="1" stroke-opacity=".22"/>
       </svg>
     </div>
   </div>
 </section>
 
-<!-- MANIFESTO -->
 <section class="manifesto" id="manifesto">
   <div class="wrap manifesto-grid rv">
     <div>
@@ -350,7 +351,6 @@
   </div>
 </section>
 
-<!-- VALUES -->
 <section id="valori">
   <div class="wrap">
     <div class="sec-head rv">
@@ -382,7 +382,6 @@
   </div>
 </section>
 
-<!-- ACTIVITIES -->
 <section id="attivita" style="background:var(--light-2)">
   <div class="wrap">
     <div class="sec-head rv">
@@ -425,13 +424,12 @@
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <span class="tag mono">Etica</span>
         <h3>Etica &amp; diritti</h3>
-        <p>Riflessione pubblica sulle implicazioni etiche e sociali di robotica e IA, e promozione dei diritti e delle pari opportunità.</p>
+        <p>Riflessione pubblica sulle implicazioni etiche e sociali di robotica e IA, e promozione dei direitos e delle pari opportunità.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- IMPACT -->
 <section class="impact">
   <div class="wrap impact-grid rv">
     <div class="stat"><b>100%</b><span>No-profit, nessun utile distribuito</span></div>
@@ -441,7 +439,6 @@
   </div>
 </section>
 
-<!-- JOIN -->
 <section id="partecipa" class="join">
   <div class="wrap join-grid">
     <div class="rv">
@@ -468,7 +465,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="foot-grid">
