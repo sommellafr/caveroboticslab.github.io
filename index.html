@@ -4,524 +4,195 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="dark">
-<title>CaveRoboticsLab — Una robotica umanistica</title>
-<meta name="description" content="CaveRoboticsLab APS: laboratorio no-profit per una robotica umanistica. Tecnologia al servizio delle persone, della conoscenza e del Pianeta.">
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="CaveRoboticsLab — Una robotica umanistica">
-<meta property="og:description" content="Laboratorio no-profit per una robotica umanistica. Tecnologia al servizio delle persone, della conoscenza e del Pianeta.">
+<title>CaveRoboticsLab — Una Robotica Umanistica</title>
+<meta name="description" content="CaveRoboticsLab APS: Laboratorio di robotica avanzata e open-source per una robotica umanistica.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet">
 
 <style>
-  :root{
-    /* Palette Dark Tech - Ispirata ai terminali ingegneristici e dashboard finanziarie */
-    --night: #050811;        /* Sfondo principale profondo per l'effetto "Caverna" */
-    --night-2: #0B1120;      /* Colore delle card e dei blocchi di contrasto */
-    --night-3: #121B2E;      /* Highlights interni */
-    --cave: #1E3A5F;
-    --steel: #3A8BFF;        /* Blu elettrico hi-tech per elementi attivi */
-    --steel-light: #7EB8F7;
-    --steel-ink: #1E4E8C;
-    --glow: #F4B860;         /* L'ambra dorata che rappresenta la luce della conoscenza */
-    --glow-soft: #F7CD8C;
-    
-    /* Inversione di contrasto: il testo diventa chiaro su sfondo scuro */
-    --light: #0A0F1E;        
-    --light-2: #0F172A;      /* Grigio ardesia scuro per sezioni alternate */
-    --ink: #F1F5F9;          /* Bianco titanio per la massima leggibilità */
-    --ink-soft: #94A3B8;     /* Grigio tech per testi secondari */
-    
-    /* Griglia geometrica che ricorda i blueprint CAD o i grafici Quant */
-    --line: rgba(255, 255, 255, 0.08);
-    --line-2: rgba(255, 255, 255, 0.04);
-    --line-d: rgba(58, 139, 255, 0.2);
-    --maxw: 1200px;
-    --r: 18px;
+  :root {
+    --night: #03050a;
+    --glow: #F4B860;
+    --ink: #ffffff;
+    --ink-soft: #8a99ad;
+    --steel: #3A8BFF;
+    --line: rgba(255, 255, 255, 0.1);
   }
 
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    background:var(--night);
-    color:var(--ink);
-    font-family:'Inter',system-ui,sans-serif;
-    font-size:17px;line-height:1.6;
-    -webkit-font-smoothing:antialiased;overflow-x:hidden;
-    /* Micro-griglia di sfondo */
-    background-image: linear-gradient(var(--line-2) 1px, transparent 1px),
-                      linear-gradient(90deg, var(--line-2) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-  ::selection{background:var(--glow);color:var(--night)}
-  a{color:inherit;text-decoration:none}
-  img,svg{display:block;max-width:100%}
-
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-  .mono{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase}
-  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;font-weight:700;line-height:1.04;letter-spacing:-0.02em}
-
-  /* ---------- NAV ---------- */
-  header{
-    position:sticky;top:0;z-index:50;
-    background:color-mix(in srgb, var(--night) 85%, transparent);
-    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
-  }
-  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
-  .brand{display:flex;align-items:center;gap:12px;font-family:'Space Grotesk';font-weight:700;font-size:1.15rem;letter-spacing:-0.01em;color:var(--ink)}
-  .brand .mark{width:34px;height:34px;flex:none}
-  .nav-links{display:flex;gap:30px;align-items:center}
-  .nav-links a{font-size:.93rem;font-weight:500;color:var(--ink-soft);transition:color .2s}
-  .nav-links a:hover{color:var(--steel-light)}
-  .nav-links a.nav-cta{
-    background:var(--ink);color:var(--night);padding:11px 20px;border-radius:100px;
-    font-size:.9rem;font-weight:600;transition:background .2s,transform .2s;
-  }
-  .nav-links a.nav-cta:hover{background:var(--glow);color:var(--night);transform:translateY(-1px)}
-  .burger{display:none;background:none;border:none;cursor:pointer;width:40px;height:40px;color:var(--ink)}
-
-  /* ---------- HERO ---------- */
-  .hero{padding:64px 0 80px}
-  .hero-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:54px;align-items:center}
-  .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--steel-light);margin-bottom:24px}
-  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--glow);box-shadow:0 0 0 4px rgba(244,184,96,.25)}
-  .hero h1{font-size:clamp(2.8rem,6.4vw,4.7rem);font-weight:700}
-  .hero h1 .lit{color:var(--glow);position:relative}
-  .hero .subhead{font-family:'Space Grotesk';font-weight:500;font-size:clamp(1.1rem,2vw,1.4rem);color:var(--ink);margin-top:16px;letter-spacing:-0.01em}
-  .hero p.lead{font-size:1.1rem;color:var(--ink-soft);margin-top:22px;max-width:40ch}
-  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   
-  .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:100px;font-weight:600;font-size:1rem;transition:transform .2s,background .2s,box-shadow .2s,border-color .2s,color .2s;cursor:pointer;border:none}
-  .btn-primary{background:var(--ink);color:var(--night)}
-  .btn-primary:hover{transform:translateY(-2px);background:var(--glow);box-shadow:0 14px 32px -14px rgba(244,184,96,.4)}
-  .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
-  .btn-ghost:hover{border-color:var(--steel-light);color:var(--steel-light);background:var(--line-2)}
-  .btn .arr{transition:transform .2s}
-  .btn:hover .arr{transform:translate(3px,-3px)}
+  body {
+    background: var(--night);
+    color: var(--ink);
+    font-family: 'Space Grotesk', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ---------- NAV STILE SPACEX ---------- */
+  header {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+    background: linear-gradient(to bottom, rgba(3,5,10,0.8), transparent);
+    backdrop-filter: blur(5px);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 80px; max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .brand svg { width: 28px; height: 28px; }
+  .nav-links { display: flex; gap: 35px; align-items: center; }
+  .nav-links a { font-size: .85rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink); transition: opacity .2s; }
+  .nav-links a:hover { opacity: 0.7; color: var(--glow); }
+
+  /* ---------- SEZIONI CORPO BLOCCO (SpaceX Style) ---------- */
+  .section-hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 12vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  }
   
-  .facts{display:flex;gap:30px;margin-top:44px;flex-wrap:wrap}
-  .fact{display:flex;flex-direction:column;gap:3px}
-  .fact b{font-family:'Space Grotesk';font-size:1.02rem;color:var(--ink);font-weight:600}
-  .fact span{color:var(--ink-soft);font-size:.83rem}
-
-  /* Hero Panel */
-  .panel{
-    background:radial-gradient(120% 100% at 50% 8%, #16233f 0%, var(--night-2) 55%, #050811 100%);
-    border-radius:24px;aspect-ratio:5/6;position:relative;overflow:hidden;
-    box-shadow:0 44px 90px -44px rgba(5,8,17,.75);border:1px solid var(--line);
+  .section-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(3,5,10,0.95) 15%, rgba(3,5,10,0.3) 60%, rgba(3,5,10,0.5) 100%);
+    z-index: 1;
   }
-  .panel .ptag{position:absolute;top:18px;left:20px;color:rgba(126,184,247,.55);z-index:5}
-  .panel .pcoord{position:absolute;bottom:18px;right:20px;color:rgba(244,184,96,.6);z-index:5}
-  .panel svg{position:absolute;inset:0;width:100%;height:100%}
 
-  .ray{stroke:var(--glow);stroke-width:2;stroke-linecap:round;opacity:0}
-  .glowfill{opacity:0}
-  .archline{fill:none;stroke:var(--steel);stroke-width:1.6;stroke-opacity:.5}
-  .rock{fill:var(--cave)}
-  .robot-body{fill:#050811;stroke:var(--steel-light);stroke-width:1.4;stroke-opacity:.7}
-  .robot-eye{fill:var(--glow);filter:drop-shadow(0 0 4px var(--glow))}
-
-  .reveal-cave .glowfill{animation:glowin 1.6s ease forwards}
-  .reveal-cave .ray{animation:rayin 1.1s ease forwards}
-  .reveal-cave .ray.r2{animation-delay:.12s}.reveal-cave .ray.r3{animation-delay:.24s}
-  .reveal-cave .ray.r4{animation-delay:.36s}.reveal-cave .ray.r5{animation-delay:.48s}.reveal-cave .ray.r6{animation-delay:.6s}
-  .reveal-cave .robot{animation:rise 1s ease .5s both}
-  @keyframes glowin{from{opacity:0}to{opacity:1}}
-  @keyframes rayin{from{opacity:0}to{opacity:.7}}
-  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-  .breathe{animation:breathe 4.5s ease-in-out infinite}
-  @keyframes breathe{0%,100%{opacity:.62}50%{opacity:1}}
-  .float{animation:float 5s ease-in-out infinite}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-
-  /* ---------- SECTION SHELL ---------- */
-  section{padding:96px 0}
-  .sec-head{max-width:720px;margin-bottom:54px}
-  .sec-head .eyebrow{margin-bottom:18px}
-  .sec-head h2{font-size:clamp(2rem,4vw,2.9rem)}
-  .sec-head p{color:var(--ink-soft);margin-top:18px;font-size:1.06rem}
-
-  /* ---------- MANIFESTO ---------- */
-  .manifesto{background:var(--night-2);color:var(--ink);position:relative;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .manifesto::before{content:"";position:absolute;top:-30%;right:-10%;width:520px;height:520px;border-radius:50%;
-    background:radial-gradient(circle, rgba(244,184,96,.1), transparent 65%);pointer-events:none}
-  .manifesto-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:start;position:relative}
-  .manifesto .eyebrow{color:var(--steel-light)}
-  .manifesto .quote{font-family:'Space Grotesk';font-weight:600;font-size:clamp(1.7rem,3.6vw,2.7rem);line-height:1.16;letter-spacing:-0.02em;max-width:20ch;margin-top:18px}
-  .manifesto .quote .hl{color:var(--glow)}
-  .manifesto .body{color:var(--ink-soft);font-size:1.05rem}
-  .manifesto .body p+p{margin-top:18px}
-
-  /* ---------- VALUES (Bento Grid Style) ---------- */
-  .values-grid{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
-  .value{padding:38px 36px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:background .25s}
-  .value:hover{background:var(--night-2)}
-  .value .vnum{color:var(--steel-light);margin-bottom:22px;font-weight:700}
-  .value h3{font-size:1.4rem;margin-bottom:10px}
-  .value p{color:var(--ink-soft);font-size:.98rem}
-
-  /* ---------- ACTIVITIES ---------- */
-  .acts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .card{background:var(--night-2);border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;transition:transform .25s,box-shadow .25s,border-color .25s;display:flex;flex-direction:column;gap:14px}
-  .card:hover{transform:translateY(-4px);box-shadow:0 24px 46px -26px rgba(0,0,0,.5);border-color:var(--steel)}
-  .card .ic{width:46px;height:46px;border-radius:12px;background:var(--night-3);color:var(--steel-light);display:flex;align-items:center;justify-content:center;flex:none;border:1px solid var(--line)}
-  .card .tag{color:var(--steel-light)}
-  .card h3{font-size:1.26rem}
-  .card p{color:var(--ink-soft);font-size:.95rem}
-
-  /* ---------- IMPACT ---------- */
-  .impact{background:var(--night-3);color:var(--ink);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
-  .impact .stat{border-left:2px solid var(--steel);padding-left:18px}
-  .impact .stat b{display:block;font-family:'Space Grotesk';font-weight:700;font-size:clamp(2rem,4vw,3rem);line-height:1;color:var(--glow)}
-  .impact .stat span{font-size:.92rem;font-weight:500;margin-top:8px;display:block;color:var(--ink-soft)}
-
-  /* ---------- JOIN ---------- */
-  .join-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
-  .join .sec-head{margin-bottom:30px}
-  .pathways{display:flex;flex-direction:column;gap:14px}
-  .pathway{display:flex;gap:18px;align-items:flex-start;padding:22px 24px;border:1px solid var(--line);border-radius:var(--r);background:var(--night-2);transition:border-color .2s,transform .2s}
-  .pathway:hover{border-color:var(--steel);transform:translateX(4px)}
-  .pathway .pn{font-family:'Space Mono';color:var(--steel-light);font-weight:700;font-size:1.05rem;flex:none}
-  .pathway h4{font-family:'Space Grotesk';font-size:1.1rem;margin-bottom:4px;font-weight:600}
-  .pathway p{color:var(--ink-soft);font-size:.93rem}
+  .container { position: relative; z-index: 2; width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 40px; }
   
-  .join-card{background:radial-gradient(120% 120% at 80% 0%, #16233f, var(--night) 60%);color:var(--ink);border-radius:24px;padding:44px 40px;border:1px solid var(--line)}
-  .join-card .eyebrow{color:var(--steel-light)}
-  .join-card h3{font-size:1.85rem;margin:14px 0 12px}
-  .join-card p{color:var(--ink-soft);margin-bottom:26px}
-  .join-card .btn-primary{background:var(--glow);color:var(--night);width:100%;justify-content:center}
-  .join-card .btn-primary:hover{box-shadow:0 14px 32px -14px rgba(244,184,96,.6);background:var(--ink)}
-  .join-card .note{margin-top:18px;font-size:.82rem;color:rgba(255,255,255,0.4)}
+  .mono-tag { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--glow); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 15px; display: block; }
+  h1, h2 { font-size: clamp(2.3rem, 5.5vw, 4.2rem); font-weight: 700; text-transform: uppercase; line-height: 0.95; letter-spacing: -0.03em; max-width: 18ch; }
+  .sub-text { font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--ink-soft); margin-top: 20px; max-width: 55ch; font-weight: 400; line-height: 1.4; }
 
-  /* ---------- FOOTER ---------- */
-  footer{background:var(--night-2);color:var(--ink-soft);padding:70px 0 36px;border-top:1px solid var(--line)}
-  footer .brand{color:var(--ink);margin-bottom:14px}
-  footer .desc{max-width:40ch;font-size:.95rem}
-  footer .motto{margin-top:14px;color:var(--glow)}
-  .foot-col h5{font-family:'Space Grotesk';color:var(--ink);font-size:1rem;margin-bottom:14px;font-weight:600}
-  .foot-col a,.foot-col p{display:block;font-size:.92rem;margin-bottom:9px;transition:color .2s}
-  .foot-col a:hover{color:var(--steel-light)}
-  .foot-bottom{margin-top:54px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:.82rem;color:rgba(255,255,255,0.3)}
-
-  /* ---------- REVEAL ANIMATIONS ---------- */
-  .rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
-  .rv.in{opacity:1;transform:none}
-
-  /* ---------- RESPONSIVE ---------- */
-  @media(max-width:980px){
-    .hero-grid,.manifesto-grid,.join-grid{grid-template-columns:1fr;gap:42px}
-    .panel{max-width:440px}
-    .acts{grid-template-columns:repeat(2,1fr)}
-    .impact-grid{grid-template-columns:repeat(2,1fr);gap:34px}
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 40px; border: 1px solid var(--ink); color: var(--ink);
+    font-weight: 700; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase;
+    cursor: pointer; transition: background .3s, color .3s; margin-top: 30px;
   }
-  @media(max-width:680px){
-    .nav-links{position:fixed;inset:74px 0 auto 0;background:var(--night-2);flex-direction:column;gap:0;padding:8px 0;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:transform .3s;align-items:stretch;max-height: calc(100vh - 74px); overflow-y: auto;}
-    .nav-links.open{transform:none}
-    .nav-links a{padding:15px 28px;border-bottom:1px solid var(--line)}
-    .nav-links a.nav-cta{margin:12px 28px;text-align:center;background:var(--ink);color:var(--night)}
-    .burger{display:flex;align-items:center;justify-content:center}
-    section{padding:72px 0}
-    .values-grid,.acts{grid-template-columns:1fr}
-    .impact-grid{grid-template-columns:1fr 1fr}
-    .foot-grid{grid-template-columns:1fr;gap:32px}
-  }
-  @media(prefers-reduced-motion:reduce){
-    *{animation:none!important;transition:none!important}
-    .glowfill,.ray{opacity:1}.ray{opacity:.7}.robot{opacity:1}
-    .rv{opacity:1;transform:none}
+  .btn:hover { background: var(--ink); color: var(--night); }
+  .btn-glow { border-color: var(--glow); color: var(--glow); }
+  .btn-glow:hover { background: var(--glow); color: var(--night); }
+
+  .grid-display { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: 50px; }
+  .grid-item { border-left: 1px solid var(--line); padding-left: 20px; }
+  .grid-item h3 { font-size: 1.3rem; text-transform: uppercase; margin-bottom: 10px; }
+  .grid-item p { color: var(--ink-soft); font-size: 0.95rem; max-width: 40ch; }
+
+  footer { background: var(--night); padding: 60px 40px; border-top: 1px solid var(--line); font-size: 0.75rem; font-family: 'Space Mono', monospace; color: var(--ink-soft); }
+  .foot-wrap { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .foot-links { display: flex; gap: 25px; }
+  .foot-links a { text-transform: uppercase; color: var(--ink); }
+
+  @media(max-width: 768px) {
+    .nav-links { display: none; }
+    .grid-display { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <radialGradient id="markGlow" cx="50%" cy="32%" r="62%">
-      <stop offset="0%" stop-color="#F7CD8C"/>
-      <stop offset="45%" stop-color="#F4B860"/>
-      <stop offset="100%" stop-color="#0E162B" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="heroGlow" cx="50%" cy="26%" r="68%">
-      <stop offset="0%" stop-color="#FBE3B4"/>
-      <stop offset="35%" stop-color="#F4B860"/>
-      <stop offset="78%" stop-color="#9A6A24" stop-opacity=".35"/>
-      <stop offset="100%" stop-color="#0A0F1E" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-</svg>
-
 <header>
   <div class="wrap nav">
-    <a href="#top" class="brand" aria-label="CaveRoboticsLab home">
-      <svg class="mark" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-        <rect x="1.5" y="1.5" width="33" height="33" rx="9" fill="#0A0F1E"/>
-        <path d="M11 27 V18 Q11 10.5 18 10.5 Q25 10.5 25 18 V27 Z" fill="url(#markGlow)"/>
-        <path d="M11 27 V18 Q11 10.5 18 10.5 Q25 10.5 25 18 V27" stroke="#4A9EFF" stroke-width="1.3" stroke-opacity=".6" fill="none"/>
-        <circle cx="18" cy="15" r="2.1" fill="#F4B860"/>
-        <rect x="15.4" y="20.5" width="5.2" height="6.5" rx="1.4" fill="#070B16" stroke="#7EB8F7" stroke-width="1" stroke-opacity=".75"/>
-        <circle cx="18" cy="23" r=".8" fill="#F4B860"/>
-        <line x1="18" y1="20.5" x2="18" y2="18.8" stroke="#7EB8F7" stroke-width="1" stroke-opacity=".75"/>
+    <a href="#top" class="brand">
+      <svg viewBox="0 0 36 36" fill="none">
+        <rect x="2" y="2" width="32" height="32" rx="4" stroke="#ffffff" stroke-width="2"/>
+        <path d="M12 24 V16 Q12 10 18 10 Q24 10 24 16 V24" stroke="#F4B860" stroke-width="2" fill="none"/>
+        <circle cx="18" cy="16" r="2" fill="#3A8BFF"/>
       </svg>
-      CaveRoboticsLab
+      CaveRobotics
     </a>
-    <nav class="nav-links" id="navLinks">
-      <a href="#manifesto">Manifesto</a>
-      <a href="#valori">Valori</a>
-      <a href="#attivita">Attività</a>
-      <a href="#partecipa">Partecipa</a>
-      <a href="#partecipa" class="nav-cta">Diventa socio</a>
+    <nav class="nav-links">
+      <a href="#filosofia">Filosofia</a>
+      <a href="#prototipi">Prototipi</a>
+      <a href="#eventi">Eventi</a>
+      <a href="#partecipa">Unisciti</a>
     </nav>
-    <button class="burger" id="burger" aria-label="Apri menu">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
   </div>
 </header>
 
-<a id="top"></a>
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="eyebrow mono"><span class="dot"></span>APS · Ente del Terzo Settore</span>
-      <h1>Una robotica<br><span class="lit">umanistica</span>.</h1>
-      <p class="subhead">Tecnologia al servizio delle persone, della conoscenza e del Pianeta.</p>
-      <p class="lead">Come chi esce dalla caverna di Platone e va verso la luce, crediamo in una tecnologia che libera, include e dà valore. Un laboratorio no-profit che sviluppa robotica e la porta tra le persone, le scuole e le comunità.</p>
-      <div class="hero-cta">
-        <a href="#partecipa" class="btn btn-primary">Diventa socio
-          <svg class="arr" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="#attivita" class="btn btn-ghost">Scopri le attività</a>
-      </div>
-      <div class="facts">
-        <div class="fact"><b>No-profit</b><span>Nessuno scopo di lucro, solo impatto</span></div>
-        <div class="fact"><b>Open source</b><span>Conoscenza libera e condivisa</span></div>
-        <div class="fact"><b>Per tutti</b><span>Senza barriere d'accesso</span></div>
-      </div>
-    </div>
-
-    <div class="panel" id="panel">
-      <span class="ptag mono">// allegoria.caverna</span>
-      <span class="pcoord mono">ombra → luce</span>
-      <svg viewBox="0 0 400 480" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        <g class="breathe">
-          <line class="ray r1" x1="200" y1="150" x2="200" y2="40"/>
-          <line class="ray r2" x1="200" y1="150" x2="120" y2="70"/>
-          <line class="ray r3" x1="200" y1="150" x2="280" y2="70"/>
-          <line class="ray r4" x1="200" y1="155" x2="70" y2="120"/>
-          <line class="ray r5" x1="200" y1="155" x2="330" y2="120"/>
-          <line class="ray r6" x1="200" y1="160" x2="40" y2="180"/>
-          <line class="ray r6" x1="200" y1="160" x2="360" y2="180"/>
-        </g>
-        <path class="glowfill breathe" d="M120 380 V210 Q120 120 200 120 Q280 120 280 210 V380 Z"
-              fill="url(#heroGlow)"/>
-        <path class="archline" d="M120 380 V210 Q120 120 200 120 Q280 120 280 210 V380"/>
-        <circle class="rock" cx="128" cy="240" r="2" opacity=".6"/>
-        <circle class="rock" cx="123" cy="280" r="1.5" opacity=".5"/>
-        <circle class="rock" cx="130" cy="320" r="1.8" opacity=".4"/>
-        <circle class="rock" cx="272" cy="245" r="2" opacity=".6"/>
-        <circle class="rock" cx="277" cy="285" r="1.5" opacity=".5"/>
-        <circle class="rock" cx="270" cy="325" r="1.8" opacity=".4"/>
-        <g class="robot float">
-          <line class="robot-body" x1="200" y1="300" x2="200" y2="290"/>
-          <circle cx="200" cy="287" r="2.4" fill="#F4B860"/>
-          <rect class="robot-body" x="186" y="300" width="28" height="24" rx="7"/>
-          <circle class="robot-eye" cx="200" cy="312" r="3.2"/>
-          <rect class="robot-body" x="190" y="326" width="20" height="34" rx="6"/>
-          <line class="robot-body" x1="186" y1="334" x2="176" y2="350"/>
-          <line class="robot-body" x1="214" y1="334" x2="224" y2="350"/>
-        </g>
-        <line x1="130" y1="380" x2="270" y2="380" stroke="#4A9EFF" stroke-width="1" stroke-opacity=".22"/>
-      </svg>
-    </div>
+<section id="top" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1581092334651-ddf26d9aae9d?q=80&w=1920&auto=format&fit=crop');">
+  <div class="container">
+    <span class="mono-tag">// APS ETS · DALLE OMBRE ALLA LUCE</span>
+    <h1>Una Robotica Umanistica.</h1>
+    <p class="sub-text">Sviluppiamo tecnologia open-source e sistemi autonomi avanzati, mettendo l'ingegneria scientifica di precisione al servizio diretto delle persone e del Pianeta.</p>
+    <a href="#filosofia" class="btn">Esplora la Visione</a>
   </div>
 </section>
 
-<section class="manifesto" id="manifesto">
-  <div class="wrap manifesto-grid rv">
-    <div>
-      <span class="eyebrow mono"><span class="dot"></span>Chi siamo</span>
-      <p class="quote">La tecnologia non deve allontanarci dall'umano: deve riportarci <span class="hl">alla luce</span>.</p>
-    </div>
-    <div class="body">
-      <p>CaveRoboticsLab è un'Associazione di Promozione Sociale apartitica e senza scopo di lucro. Nasce da un'idea ispirata all'allegoria della caverna di Platone: la conoscenza e la tecnologia devono emancipare le persone, non imprigionarle nelle ombre.</p>
-      <p>Facciamo ricerca, costruiamo prototipi e soprattutto condividiamo. Portiamo la robotica fuori dai laboratori — nelle scuole, nelle piazze e nelle comunità — perché sia davvero di tutti.</p>
-    </div>
+<section id="filosofia" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=1920&auto=format&fit=crop');">
+  <div class="container">
+    <span class="mono-tag">// LA NOSTRA FILOSOFIA</span>
+    <h2>Tecnologia che libera e include.</h2>
+    <p class="sub-text">Portiamo la robotica fuori dai laboratori chiusi. Progettiamo hardware e algoritmi capaci di convertire dati complessi e caotici in decisioni precise, ottimizzando le risorse pubbliche, riducendo l'errore umano e abbattendo ogni barriera d'accesso alla conoscenza.</p>
   </div>
 </section>
 
-<section id="valori">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="eyebrow mono"><span class="dot"></span>I nostri valori</span>
-      <h2>Quattro principi guidano ogni cosa.</h2>
-    </div>
-    <div class="values-grid rv">
-      <div class="value">
-        <div class="vnum mono">01</div>
-        <h3>Innovazione responsabile</h3>
-        <p>Sviluppo tecnologico consapevole dei suoi impatti sulle persone e sull'ambiente. Ci chiediamo sempre a chi serve ciò che costruiamo.</p>
+<section id="prototipi" class="section-hero" style="background-image: url('https://test-bucket-image-generation.s3.amazonaws.com/generated_images/input_file_0.png');">
+  <div class="container">
+    <span class="mono-tag">// AREA COSTRUZIONE & OPERAZIONI</span>
+    <h2>I Prototipi in via di Sviluppo.</h2>
+    <p class="sub-text">Progettiamo e assembliamo internamente i nostri vettori hardware, combinando strutture meccaniche ottimizzate e intelligenza artificiale di bordo.</p>
+    
+    <div class="grid-display">
+      <div class="grid-item">
+        <h3>01 / Rover Terrestre Autonomo</h3>
+        <p>Un veicolo tagliaerba specializzato nella gestione e manutenzione ecologica del verde. Basato su ROS2 Humble, LiDAR per lo SLAM geometrico e motori ad encoder, mappa l'ambiente e ottimizza le traiettorie di taglio azzerando le emissioni.</p>
       </div>
-      <div class="value">
-        <div class="vnum mono">02</div>
-        <h3>Apertura e condivisione</h3>
-        <p>Cultura open-source e conoscenza libera. Ciò che impariamo torna alla comunità, senza recinti: la luce è di tutti.</p>
-      </div>
-      <div class="value">
-        <div class="vnum mono">03</div>
-        <h3>Inclusività</h3>
-        <p>Attività accessibili a chiunque, senza barriere di età, genere, origine o condizione economica. La robotica è per tutti.</p>
-      </div>
-      <div class="value">
-        <div class="vnum mono">04</div>
-        <h3>Sostenibilità ecologica</h3>
-        <p>Ricerca attenta all'ambiente e alla transizione verde: uno dei pilastri del nostro lavoro, non l'unico orizzonte.</p>
+      <div class="grid-item">
+        <h3>02 / Flotte Aeree di Pronto Intervento</h3>
+        <p>Droni da ricognizione ad attivazione istantanea per la gestione delle emergenze. Intercettano la posizione della chiamata per superare lo shock informativo dell'utente e inviano telemetria visiva oggettiva in tempo reale al centralino, eliminando gli errori di valutazione dei codici di soccorso.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="attivita" style="background:var(--light-2)">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="eyebrow mono"><span class="dot"></span>Cosa facciamo</span>
-      <h2>Dalla ricerca alla piazza, in pratica.</h2>
-      <p>Trasformiamo le finalità di interesse generale in azioni concrete, svolte prevalentemente grazie al lavoro volontario dei soci.</p>
-    </div>
-    <div class="acts rv">
-      <div class="card">
-        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 3v4l-4 7a4 4 0 003.6 5.8h6.8A4 4 0 0019 14l-4-7V3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 3h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <span class="tag mono">R&amp;S</span>
-        <h3>Ricerca &amp; sviluppo</h3>
-        <p>Robotica, IA e automazione applicate all'innovazione sociale, all'efficienza e alla sostenibilità.</p>
+<section id="eventi" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1920&auto=format&fit=crop');">
+  <div class="container">
+    <span class="mono-tag">// IMPATTO SOCIALE & DIVULGAZIONE</span>
+    <h2>Eventi, FabLab e Comunità.</h2>
+    <p class="sub-text">La conoscenza non ha valore se rimane chiusa in una stanza. Organizziamo eventi e attività sul territorio per democratizzare l'accesso alle discipline STEM e alla robotica applicata.</p>
+    
+    <div class="grid-display">
+      <div class="grid-item">
+        <h3>Laboratori & Coding Camp</h3>
+        <p>Spazi in stile FabLab, hackathon e workshop interattivi aperti a studenti, giovani e adulti. Insegniamo a programmare e a dare vita all'hardware senza barriere economiche d'accesso.</p>
       </div>
-      <div class="card">
-        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="8" width="16" height="11" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M9 8V5a3 3 0 016 0v3M9 13h.01M15 13h.01M12 19v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <span class="tag mono">Prototipi</span>
-        <h3>Prototipi per il bene comune</h3>
-        <p>Sistemi robotici per il monitoraggio ambientale, l'agricoltura di precisione e applicazioni a impatto sociale.</p>
-      </div>
-      <div class="card">
-        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 11l18-7-7 18-3-8-8-3z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="tag mono">Pubblico</span>
-        <h3>Divulgazione</h3>
-        <p>Eventi, seminari, workshop e mostre per portare la robotica al grande pubblico, alle scuole e alle istituzioni.</p>
-      </div>
-      <div class="card">
-        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-5 9 5-9 5-9-5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 11v5c0 1 2.2 2.5 5 2.5s5-1.5 5-2.5v-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <span class="tag mono">FabLab</span>
-        <h3>Educazione &amp; laboratori</h3>
-        <p>FabLab, hackathon e coding camp su STEM e robotica, per studenti, giovani e adulti.</p>
-      </div>
-      <div class="card">
-        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="6" cy="6" r="2.5" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="6" r="2.5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="18" r="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M7.5 7.8l3.5 8M16.5 7.8L13 15.8M8.5 6h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <span class="tag mono">Reti</span>
-        <h3>Reti &amp; comunità</h3>
-        <p>Connettiamo maker, ricercatori, scuole e imprese in ecosistemi di innovazione aperta, in Italia e all'estero.</p>
-      </div>
-      <div class="card">
-        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <span class="tag mono">Etica</span>
-        <h3>Etica &amp; diritti</h3>
-        <p>Riflessione pubblica sulle implicazioni etiche e sociali di robotica e IA, e promozione dei direitos e delle pari opportunità.</p>
+      <div class="grid-item">
+        <h3>Mostre e Seminari Pubblici</h3>
+        <p>Portiamo i prototipi nelle piazze, nelle scuole e nelle istituzioni. Organizziamo momenti di divulgazione e dibattito pubblico sulle implicazioni etiche e sociali dell'Intelligenza Artificiale.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="impact">
-  <div class="wrap impact-grid rv">
-    <div class="stat"><b>100%</b><span>No-profit, nessun utile distribuito</span></div>
-    <div class="stat"><b>0</b><span>Barriere all'ingresso per partecipare</span></div>
-    <div class="stat"><b>∞</b><span>Durata: l'associazione non ha scadenza</span></div>
-    <div class="stat"><b>3→9</b><span>Soci nel Consiglio Direttivo eletto</span></div>
-  </div>
-</section>
-
-<section id="partecipa" class="join">
-  <div class="wrap join-grid">
-    <div class="rv">
-      <div class="sec-head">
-        <span class="eyebrow mono"><span class="dot"></span>Partecipa</span>
-        <h2>C'è un modo per ognuno.</h2>
-        <p>L'ammissione è a tempo indeterminato e aperta a persone fisiche e giuridiche che ne condividono le finalità.</p>
-      </div>
-      <div class="pathways">
-        <div class="pathway"><span class="pn">→</span><div><h4>Diventa socio</h4><p>Entra nell'associazione, vota in assemblea e partecipa alle decisioni e ai progetti.</p></div></div>
-        <div class="pathway"><span class="pn">→</span><div><h4>Fai volontariato</h4><p>Metti tempo e competenze al servizio dei laboratori, degli eventi e dei prototipi.</p></div></div>
-        <div class="pathway"><span class="pn">→</span><div><h4>Collabora o sostieni</h4><p>Scuole, enti, università e imprese: costruiamo insieme progetti e reti di innovazione.</p></div></div>
-      </div>
-    </div>
-    <div class="join-card rv">
-      <span class="eyebrow mono"><span class="dot"></span>Unisciti a noi</span>
-      <h3>Porta la robotica più vicino alle persone.</h3>
-      <p>Scrivici per richiedere l'adesione, proporre una collaborazione o saperne di più sulle prossime attività.</p>
-      <a href="mailto:info@caveroboticslab.it" class="btn btn-primary">Scrivici una mail
-        <svg class="arr" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <p class="note">La quota associativa è annuale, non rivalutabile e non rimborsabile. Le cariche sociali sono gratuite.</p>
-    </div>
+<section id="partecipa" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1920&auto=format&fit=crop');">
+  <div class="container">
+    <span class="mono-tag">// UNISCITI AL LABORATORIO</span>
+    <h2>Costruisci una Robotica Umanistica.</h2>
+    <p class="sub-text">L'ammissione come soci è aperta a sviluppatori, ricercatori, maker e appassionati. Condividiamo codice libero, creiamo hardware e generiamo impatto sociale sul territorio.</p>
+    <a href="mailto:info@caveroboticslab.it" class="btn btn-glow">Richiedi Adesione</a>
   </div>
 </section>
 
 <footer>
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <div class="brand">
-          <svg class="mark" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-            <rect x="1.5" y="1.5" width="33" height="33" rx="9" fill="#0E162B"/>
-            <path d="M11 27 V18 Q11 10.5 18 10.5 Q25 10.5 25 18 V27 Z" fill="url(#markGlow)"/>
-            <path d="M11 27 V18 Q11 10.5 18 10.5 Q25 10.5 25 18 V27" stroke="#4A9EFF" stroke-width="1.3" stroke-opacity=".6" fill="none"/>
-            <circle cx="18" cy="15" r="2.1" fill="#F4B860"/>
-            <rect x="15.4" y="20.5" width="5.2" height="6.5" rx="1.4" fill="#070B16" stroke="#7EB8F7" stroke-width="1" stroke-opacity=".75"/>
-            <circle cx="18" cy="23" r=".8" fill="#F4B860"/>
-          </svg>
-          CaveRoboticsLab
-        </div>
-        <p class="desc">Associazione di Promozione Sociale per una robotica umanistica: tecnologia al servizio delle persone, della conoscenza e del Pianeta.</p>
-        <p class="motto mono">Dalle ombre alla luce</p>
-      </div>
-      <div class="foot-col">
-        <h5>Esplora</h5>
-        <a href="#manifesto">Manifesto</a>
-        <a href="#valori">Valori</a>
-        <a href="#attivita">Attività</a>
-        <a href="#partecipa">Partecipa</a>
-      </div>
-      <div class="foot-col">
-        <h5>Contatti</h5>
-        <a href="mailto:info@caveroboticslab.it">info@caveroboticslab.it</a>
-        <p>Sede legale: Comune di —</p>
-        <p>C.F. / RUNTS: —</p>
-      </div>
+  <div class="foot-wrap">
+    <div>
+      <p>© 2026 CAVE ROBOTICS LAB APS — UNA ROBOTICA UMANISTICA</p>
+      <p style="margin-top: 5px; opacity: 0.5;">ETS ai sensi del D.Lgs. 117/2017 · Sede Legale: Italia · C.F.: —</p>
     </div>
-    <div class="foot-bottom">
-      <span>© 2026 CaveRoboticsLab APS — Ente del Terzo Settore ai sensi del D.Lgs. 117/2017.</span>
-      <span>Apartitica · Aconfessionale · No-profit</span>
+    <div class="foot-links">
+      <a href="mailto:info@caveroboticslab.it">Contatti</a>
+      <a href="#top">Top ↑</a>
     </div>
   </div>
 </footer>
 
-<script>
-  const burger = document.getElementById('burger');
-  const navLinks = document.getElementById('navLinks');
-  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
-
-  const panel = document.getElementById('panel');
-  const startCave = () => panel.classList.add('reveal-cave');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((e) => { e.forEach(x => { if (x.isIntersecting) { startCave(); io.disconnect(); } }); }, { threshold: 0.3 });
-    io.observe(panel);
-  } else { startCave(); }
-
-  const revs = document.querySelectorAll('.rv');
-  if ('IntersectionObserver' in window) {
-    const ro = new IntersectionObserver((e) => { e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('in'); ro.unobserve(x.target); } }); }, { threshold: 0.15 });
-    revs.forEach(el => ro.observe(el));
-  } else { revs.forEach(el => el.classList.add('in')); }
-</script>
 </body>
 </html>
