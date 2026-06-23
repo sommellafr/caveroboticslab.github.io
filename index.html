@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="dark">
-<title>CaveRoboticsLab — Una Robotica Umanistica</title>
-<meta name="description" content="CaveRoboticsLab APS: Laboratorio di robotica avanzata e open-source per una robotica umanistica.">
+<title>CaveRoboticsLab — Robotica Industriale Open-Source</title>
+<meta name="description" content="CaveRoboticsLab APS: Progettazione e produzione di robotica industriale open-source e sistemi autonomi.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,33 +39,41 @@
     backdrop-filter: blur(5px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   }
-  .nav { display: flex; align-items: center; justify-content: space-between; height: 90px; max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 75px; max-width: 1400px; margin: 0 auto; padding: 0 40px; }
   
   .brand-link { display: flex; align-items: center; text-decoration: none; transition: transform 0.2s ease; }
-  .brand-link svg { display: block; height: 50px; width: auto; }
+  .brand-link svg { display: block; height: 42px; width: auto; }
 
   .nav-links { display: flex; gap: 35px; align-items: center; }
-  .nav-links a { font-size: .85rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink); transition: opacity .2s, color .2s; }
+  .nav-links a { font-size: .85rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink); transition: color .2s; text-decoration: none; }
   .nav-links a:hover { color: var(--glow); }
 
-  /* ---------- SEZIONI CORPO BLOCCO (Scroll Reveal & SpaceX Design) ---------- */
+  /* ---------- SEZIONI CORPO BLOCCO (Responsive Layout) ---------- */
   .section-hero {
     position: relative;
-    height: 100vh;
+    min-height: 100vh; /* min-height evita che i testi escano dalla sezione su schermi piccoli */
     display: flex;
     align-items: flex-end;
-    padding-bottom: 12vh;
+    padding-top: 120px; /* Spazio per la nav fissa */
+    padding-bottom: 10vh;
     background-size: cover;
-    background-position: center;
+    background-position: center center;
     background-repeat: no-repeat;
     overflow: hidden;
   }
   
-  /* Animazione fluida di comparsa allo scroll */
+  /* Sfumatura protettiva per garantire la leggibilità del testo su qualsiasi immagine */
+  .section-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(3,5,10,0.95) 25%, rgba(3,5,10,0.4) 60%, rgba(3,5,10,0.6) 100%);
+    z-index: 1;
+  }
+  
+  /* Animazione di comparsa allo scroll */
   .fade-in-section {
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
   }
   .fade-in-section.is-visible {
     opacity: 1;
@@ -75,23 +83,14 @@
   .container { position: relative; z-index: 2; width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 40px; }
   
   .mono-tag { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--ink-soft); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 15px; display: block; }
-  h1, h2 { font-size: clamp(2.3rem, 5.5vw, 4.2rem); font-weight: 700; text-transform: uppercase; line-height: 0.95; letter-spacing: -0.03em; max-width: 18ch; }
-  .sub-text { font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--ink-soft); margin-top: 20px; max-width: 55ch; font-weight: 400; line-height: 1.4; }
+  h1, h2 { font-size: clamp(2rem, 5.5vw, 4.2rem); font-weight: 700; text-transform: uppercase; line-height: 1.05; letter-spacing: -0.03em; max-width: 18ch; }
+  .sub-text { font-size: clamp(1.05rem, 1.5vw, 1.3rem); color: var(--ink-soft); margin-top: 20px; max-width: 55ch; font-weight: 400; line-height: 1.45; }
 
-  /* ---------- SFONDI SEZIONI CON IMMAGINI LOCALI VALIDATE ---------- */
-  
-  /* Sezione 1: Caverna di Platone Immagine Custom */
-  #hero-caverna {
-    background-image: linear-gradient(to top, rgba(3,5,10,0.95) 15%, rgba(3,5,10,0.3) 60%, rgba(3,5,10,0.5) 100%), url('caverna.jpg');
-  }
-
-  /* Sezione 2: Filosofia - Umanizzazione e Inclusione */
-  #filosofia {
-    background-image: linear-gradient(to top, rgba(3,5,10,0.95) 20%, rgba(3,5,10,0.4)), url('tecnologia che unisce.png');
-  }
+  /* ---------- CONFIGURAZIONE SFONDI LOCALI ---------- */
+  #hero-caverna { background-image: linear-gradient(to top, rgba(3,5,10,0.95) 15%, rgba(3,5,10,0.3) 60%, rgba(3,5,10,0.6) 100%), url('caverna.jpg'); }
+  #filosofia { background-image: linear-gradient(to top, rgba(3,5,10,0.95) 20%, rgba(3,5,10,0.4)), url('tecnologia che unisce.png'); }
   #filosofia.is-visible .mono-tag { color: var(--steel); }
 
-  /* Sezione 3: Prototipi - L'esplosione Flashy */
   #prototipi {
     background-image: linear-gradient(to top, rgba(3,5,10,0.98) 10%, rgba(3,5,10,0.3)), url('Prototipi.png');
     border-top: 1px solid rgba(58, 139, 255, 0.1);
@@ -105,37 +104,74 @@
     100% { box-shadow: inset 0 0 60px rgba(244, 184, 96, 0.15); }
   }
 
-  /* Bottoni e Strutture Grid */
+  /* Pulsanti */
   .btn {
     display: inline-flex; align-items: center; gap: 10px;
     padding: 16px 40px; border: 1px solid var(--ink); color: var(--ink);
     font-weight: 700; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase;
-    cursor: pointer; transition: background .3s, color .3s, box-shadow .3s; margin-top: 30px;
+    cursor: pointer; transition: background .3s, color .3s, box-shadow .3s; margin-top: 30px; text-decoration: none;
   }
   .btn:hover { background: var(--ink); color: var(--night); }
   .btn-glow { border-color: var(--glow); color: var(--glow); }
   .btn-glow:hover { background: var(--glow); color: var(--night); box-shadow: 0 0 20px rgba(244,184,96,0.4); }
 
-  .grid-display { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: 50px; }
+  /* Struttura Grid */
+  .grid-display { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: 40px; }
   .grid-item { border-left: 2px solid var(--line); padding-left: 20px; transition: border-color 0.8s ease, background-color 0.3s; }
   #prototipi.is-visible .grid-item:nth-child(1) { border-color: var(--steel); }
   #prototipi.is-visible .grid-item:nth-child(2) { border-color: var(--glow); }
   .grid-item:hover { background-color: rgba(255,255,255,0.02); }
-  .grid-item h3 { font-size: 1.3rem; text-transform: uppercase; margin-bottom: 10px; }
-  .grid-item p { color: var(--ink-soft); font-size: 0.95rem; max-width: 40ch; line-height: 1.5; }
+  .grid-item h3 { font-size: 1.25rem; text-transform: uppercase; margin-bottom: 8px; }
+  .grid-item p { color: var(--ink-soft); font-size: 0.95rem; max-width: 42ch; line-height: 1.5; }
 
-  /* Sezioni Successive (Stock per ora mantenute oscurate) */
+  /* Altre Sezioni (Mantenute pulite in stile scuro) */
   #eventi { background-image: linear-gradient(to top, rgba(3,5,10,0.95), rgba(3,5,10,0.6)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1920&auto=format&fit=crop'); }
   #partecipa { background-image: linear-gradient(to top, rgba(3,5,10,0.95), rgba(3,5,10,0.7)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1920&auto=format&fit=crop'); }
 
+  /* Footer */
   footer { background: var(--night); padding: 60px 40px; border-top: 1px solid var(--line); font-size: 0.75rem; font-family: 'Space Mono', monospace; color: var(--ink-soft); }
   .foot-wrap { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
   .foot-links { display: flex; gap: 25px; }
-  .foot-links a { text-transform: uppercase; color: var(--ink); }
+  .foot-links a { text-transform: uppercase; color: var(--ink); text-decoration: none; }
 
+  /* ==========================================================================
+     MEDIA QUERY PER DISPOSITIVI MOBILE (OTTIMIZZAZIONE COPERTINE E LAYOUT)
+     ========================================================================== */
   @media(max-width: 768px) {
-    .nav-links { display: none; }
-    .grid-display { grid-template-columns: 1fr; }
+    .nav { padding: 0 20px; height: 65px; }
+    .nav-links { display: none; } /* Su smartphone nascondiamo i link della nav per fare spazio al logo */
+    .brand-link svg { height: 35px; } /* Scaliamo il logo per non farlo uscire dai bordi */
+    
+    .container { padding: 0 20px; } /* Riduciamo i margini per dare più spazio ai testi */
+    
+    .section-hero {
+      padding-top: 100px;
+      padding-bottom: 60px;
+      background-position: center center; /* Forza la centratura matematica dell'immagine */
+    }
+
+    /* Ottimizzazione Specifica delle Immagini su Mobile per non tagliarle male */
+    #hero-caverna {
+      background-position: 65% center; /* Sposta leggermente l'inquadratura per mostrare le catene e il fuoco anche in verticale */
+    }
+    #filosofia {
+      background-position: center center;
+    }
+    #prototipi {
+      background-position: 40% center; /* Centra il focus sul Rover e sul Drone evitando che vengano tagliati fuori dallo schermo stretto */
+    }
+
+    /* Ricalibrazione della tipografia per evitare supercazzole visive */
+    h1, h2 { font-size: 1.85rem; line-height: 1.1; }
+    .sub-text { font-size: 1rem; margin-top: 15px; }
+    .btn { width: 100%; justify-content: center; padding: 14px 20px; margin-top: 25px; } /* I bottoni diventano "Full Width", molto più facili da cliccare con il pollice */
+
+    /* Trasformiamo la Bento Grid in un flusso verticale a colonna singola */
+    .grid-display { grid-template-columns: 1fr; gap: 30px; margin-top: 30px; }
+    .grid-item { padding-left: 15px; }
+    .grid-item p { max-width: 100%; }
+    
+    .foot-wrap { flex-direction: column; align-items: flex-start; gap: 15px; }
   }
 </style>
 </head>
@@ -177,34 +213,34 @@
 <section id="hero-caverna" class="section-hero class-fade">
   <div class="container">
     <span class="mono-tag">// APS ETS · DALLE OMBRE ALLA LUCE</span>
-    <h1>Una Robotica Umanistica.</h1>
-    <p class="sub-text">Sviluppiamo tecnologia open-source e sistemi autonomi avanzati, mettendo l'ingegneria scientifica di precisione al servizio diretto delle persone e del Pianeta.</p>
+    <h1>Progettiamo e produciamo robotica industriale open-source.</h1>
+    <p class="sub-text">Sviluppiamo sistemi autonomi e vettori hardware proprietari per ottimizzare il lavoro sul campo. Partiamo dall'automazione della manutenzione del verde per ridefinire gli standard di precisione e sicurezza meccanica.</p>
     <a href="#filosofia" class="btn">Esplora la Visione</a>
   </div>
 </section>
 
 <section id="filosofia" class="section-hero class-fade">
   <div class="container">
-    <span class="mono-tag">// LA NOSTRA FILOSOFIA</span>
-    <h2>Tecnologia che libera e include.</h2>
-    <p class="sub-text">Portiamo la robotica fuori dai laboratori chiusi. Progettiamo hardware e algoritmi capaci di convertire dati complessi e caotici in decisioni precise, ottimizzando le risorse pubbliche, riducendo l'errore umano e abbattendo ogni barriera d'accesso alla conoscenza.</p>
+    <span class="mono-tag">// LA NOSTRA VISIONE</span>
+    <h2>Tecnologia accessibile, hardware trasparente.</h2>
+    <p class="sub-text">Crediamo in una robotica industriale che non sia una scatola nera proprietaria. Progettiamo sistemi basati su codice libero e architetture modificabili, riducendo i costi di manutenzione per le aziende, abbattendo gli sprechi e garantendo la massima libertà di personalizzazione dell'hardware.</p>
   </div>
 </section>
 
 <section id="prototipi" class="section-hero class-fade">
   <div class="container">
-    <span class="mono-tag">// AREA COSTRUZIONE & OPERAZIONI</span>
-    <h2>I Prototipi in via di Sviluppo.</h2>
-    <p class="sub-text">Progettiamo e assembliamo internamente i nostri vettori hardware, combinando strutture meccaniche ottimizzate e intelligenza artificiale di bordo.</p>
+    <span class="mono-tag">// PRODUZIONE & SVILUPPO</span>
+    <h2>I nostri primi vettori operativi.</h2>
+    <p class="sub-text">Uniamo carpenteria meccanica solida, elettronica di precisione e navigazione autonoma avanzata per rispondere a problemi reali sul territorio.</p>
     
     <div class="grid-display">
       <div class="grid-item">
-        <h3>01 / Rover Terrestre Autonomo</h3>
-        <p>Un veicolo tagliaerba specializzato nella gestione e manutenzione ecologica del verde. Basato su ROS2 Humble, LiDAR per lo SLAM geometrico e motori ad encoder, mappa l'ambiente e ottimizza le traiettorie di taglio azzerando le emissioni.</p>
+        <h3>01 / Rover Terrestre Tagliaerba</h3>
+        <p>Il nostro primo prodotto sul mercato. Un robot tagliaerba professionale autonomo, alimentato a batteria. Integra navigazione ROS2, sensoristica di prossimità e LiDAR per mappare l'ambiente, ottimizzare le traiettorie e azzerare le emissioni sul campo.</p>
       </div>
       <div class="grid-item">
-        <h3>02 / Flotte Aeree di Pronto Intervento</h3>
-        <p>Droni da ricognizione ad attivazione istantanea per la gestione delle emergenze. Intercettano la posizione della chiamata per superare lo shock informativo dell'utente e inviano telemetria visiva oggettiva in tempo reale al centralino, eliminando gli errori di valutazione dei codici di soccorso.</p>
+        <h3>02 / Drone da Monitoraggio</h3>
+        <p>Vettore aereo per la ricognizione rapida. Progettato per decolli istantanei in scenari critici, invia telemetria e flussi video in tempo reale per supportare i soccorsi ed eliminare gli errori di valutazione visiva durante le emergenze.</p>
       </div>
     </div>
   </div>
@@ -212,37 +248,26 @@
 
 <section id="eventi" class="section-hero class-fade">
   <div class="container">
-    <span class="mono-tag">// IMPATTO SOCIALE & DIVULGAZIONE</span>
-    <h2>Eventi, FabLab e Comunità.</h2>
-    <p class="sub-text">La conoscenza non ha valore se rimane chiusa in una stanza. Organizziamo eventi e attività sul territorio per democratizzare l'accesso alle discipline STEM e alla robotica applicata.</p>
-    
-    <div class="grid-display">
-      <div class="grid-item">
-        <h3>Laboratori & Coding Camp</h3>
-        <p>Spazi in stile FabLab, hackathon e workshop interattivi aperti a studenti, giovani e adulti. Insegniamo a programmare e a dare vita all'hardware senza barriere economiche d'accesso.</p>
-      </div>
-      <div class="grid-item">
-        <h3>Mostre e Seminari Pubblici</h3>
-        <p>Portiamo i prototipi nelle piazze, nelle scuole e nelle istituzioni. Organizziamo momenti di divulgazione e dibattito pubblico sulle implicazioni etiche e sociali dell'Intelligenza Artificiale.</p>
-      </div>
-    </div>
+    <span class="mono-tag">// IMPATTO LOCALE & CONDIVISIONE</span>
+    <h2>Condivisione tecnologica e network.</h2>
+    <p class="sub-text">Sviluppare in open-source significa far crescere l'ecosistema. Condividiamo i nostri progressi con la comunità tecnica, i maker e le università attraverso workshop pratici e collaborazioni, per creare una rete di competenze focalizzata sulla robotica applicata.</p>
   </div>
 </section>
 
 <section id="partecipa" class="section-hero class-fade">
   <div class="container">
-    <span class="mono-tag">// UNISCITI AL LABORATORIO</span>
-    <h2>Costruisci una Robotica Umanistica.</h2>
-    <p class="sub-text">L'ammissione come soci è aperta a sviluppatori, ricercatori, maker e appassionati. Condividiamo codice libero, creiamo hardware e generiamo impatto sociale sul territorio.</p>
-    <a href="mailto:info@caveroboticslab.it" class="btn btn-glow">Richiedi Adesione</a>
+    <span class="mono-tag">// COLLABORA CON IL LABORATORIO</span>
+    <h2>Sviluppa il futuro della robotica con noi.</h2>
+    <p class="sub-text">Siamo aperti alla collaborazione con ingegneri, programmatori, installatori e aziende partner. Se vuoi contribuire allo sviluppo dei nostri vettori hardware o testare le nostre soluzioni industriali sul campo, entra in contatto con il laboratorio.</p>
+    <a href="mailto:info@caveroboticslab.it" class="btn btn-glow">Contatta il Team</a>
   </div>
 </section>
 
 <footer>
   <div class="foot-wrap">
     <div>
-      <p>© 2026 CAVE ROBOTICS LAB APS — UNA ROBOTICA UMANISTICA</p>
-      <p style="margin-top: 5px; opacity: 0.5;">ETS ai sensi del D.Lgs. 117/2017 · Sede Legale: Italia · C.F.: —</p>
+      <p>© 2026 CAVE ROBOTICS LAB APS — ROBOTICA INDUSTRIALE OPEN-SOURCE</p>
+      <p style="margin-top: 5px; opacity: 0.5;">ETS ai sensi del D.Lgs. 117/2017 · Sede Legale: Italia</p>
     </div>
     <div class="foot-links">
       <a href="mailto:info@caveroboticslab.it">Contatti</a>
@@ -254,7 +279,7 @@
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const sections = document.querySelectorAll(".class-fade");
-    const observerOptions = { root: null, rootMargin: "0px", threshold: 0.15 };
+    const observerOptions = { root: null, rootMargin: "0px", threshold: 0.10 };
 
     const observer = new IntersectionObserver(function(entries, observer) {
       entries.forEach(entry => {
