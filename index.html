@@ -4,174 +4,115 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="dark">
-<title>CaveRoboticsLab — Robotica Industriale Open-Source</title>
-<meta name="description" content="CaveRoboticsLab APS: Progettazione e produzione di robotica industriale open-source e sistemi autonomi.">
-
+<title>CaveRoboticsLab — Robotica Industriale</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet">
-
 <style>
-  :root {
-    --night: #03050a;
-    --glow: #F4B860;
-    --ink: #ffffff;
-    --ink-soft: #8a99ad;
-    --steel: #3A8BFF;
-    --line: rgba(255, 255, 255, 0.05);
+  :root { 
+    --night: #03050a; 
+    --glow: #F4B860; 
+    --ink: #ffffff; 
+    --ink-soft: #8a99ad; 
+    --steel: #3A8BFF; 
+    --line: rgba(255, 255, 255, 0.05); 
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+  body { background: var(--night); color: var(--ink); font-family: 'Space Grotesk', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   
-  body {
-    background: var(--night);
-    color: var(--ink);
-    font-family: 'Space Grotesk', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-
-  /* ---------- NAV STILE SPACEX ---------- */
-  header {
-    position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-    background: linear-gradient(to bottom, rgba(3,5,10,0.95), transparent);
-    backdrop-filter: blur(5px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-  }
+  /* ---------- NAV ---------- */
+  header { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; background: linear-gradient(to bottom, rgba(3,5,10,0.95), transparent); backdrop-filter: blur(5px); border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
   .nav { display: flex; align-items: center; justify-content: space-between; height: 75px; max-width: 1400px; margin: 0 auto; padding: 0 40px; }
-  
-  .brand-link { display: flex; align-items: center; text-decoration: none; transition: transform 0.2s ease; }
+  .brand-link { display: flex; align-items: center; text-decoration: none; }
   .brand-link svg { display: block; height: 42px; width: auto; }
-
   .nav-links { display: flex; gap: 35px; align-items: center; }
-  .nav-links a { font-size: .85rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink); transition: color .2s; text-decoration: none; }
+  .nav-links a { font-size: .85rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink); text-decoration: none; transition: color .2s; }
   .nav-links a:hover { color: var(--glow); }
-
-  /* ---------- SEZIONI CORPO BLOCCO (Responsive Layout) ---------- */
-  .section-hero {
-    position: relative;
-    min-height: 100vh; /* min-height evita che i testi escano dalla sezione su schermi piccoli */
-    display: flex;
-    align-items: flex-end;
-    padding-top: 120px; /* Spazio per la nav fissa */
-    padding-bottom: 10vh;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    overflow: hidden;
+  
+  /* ---------- STRUTTURA DESKTOP (PC) ---------- */
+  .section-hero { 
+    position: relative; 
+    min-height: 100vh; 
+    display: flex; 
+    align-items: flex-end; 
+    padding-top: 120px; 
+    padding-bottom: 10vh; 
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
   }
   
-  /* Sfumatura protettiva per garantire la leggibilità del testo su qualsiasi immagine */
-  .section-hero::before {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(3,5,10,0.95) 25%, rgba(3,5,10,0.4) 60%, rgba(3,5,10,0.6) 100%);
-    z-index: 1;
+  /* Maschera di sfumatura standard per PC */
+  .section-hero::before { 
+    content: ''; 
+    position: absolute; 
+    inset: 0; 
+    background: linear-gradient(to top, rgba(3,5,10,0.95) 25%, rgba(3,5,10,0.4) 60%, rgba(3,5,10,0.6) 100%); 
+    z-index: 1; 
   }
   
-  /* Animazione di comparsa allo scroll */
-  .fade-in-section {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
-  }
-  .fade-in-section.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
+  .fade-in-section { opacity: 0; transform: translateY(30px); transition: opacity 1s ease, transform 1s ease; }
+  .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+  
   .container { position: relative; z-index: 2; width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 40px; }
-  
   .mono-tag { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--ink-soft); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 15px; display: block; }
   h1, h2 { font-size: clamp(2rem, 5.5vw, 4.2rem); font-weight: 700; text-transform: uppercase; line-height: 1.05; letter-spacing: -0.03em; max-width: 18ch; }
   .sub-text { font-size: clamp(1.05rem, 1.5vw, 1.3rem); color: var(--ink-soft); margin-top: 20px; max-width: 55ch; font-weight: 400; line-height: 1.45; }
-
-  /* ---------- CONFIGURAZIONE SFONDI LOCALI ---------- */
-  #hero-caverna { background-image: linear-gradient(to top, rgba(3,5,10,0.95) 15%, rgba(3,5,10,0.3) 60%, rgba(3,5,10,0.6) 100%), url('caverna.jpg'); }
-  #filosofia { background-image: linear-gradient(to top, rgba(3,5,10,0.95) 20%, rgba(3,5,10,0.4)), url('tecnologia che unisce.png'); }
+  
+  /* SFONDI IMMAGINI LOCALI */
+  #hero-caverna { background-image: url('caverna.jpg'); }
+  #filosofia { background-image: url('tecnologia che unisce.png'); }
   #filosofia.is-visible .mono-tag { color: var(--steel); }
+  #prototipi { background-image: url('Prototipi.png'); border-top: 1px solid rgba(58, 139, 255, 0.1); border-bottom: 1px solid rgba(244, 184, 96, 0.1); }
+  #prototipi .mono-tag { color: var(--glow); }
 
-  #prototipi {
-    background-image: linear-gradient(to top, rgba(3,5,10,0.98) 10%, rgba(3,5,10,0.3)), url('Prototipi.png');
-    border-top: 1px solid rgba(58, 139, 255, 0.1);
-    border-bottom: 1px solid rgba(244, 184, 96, 0.1);
-  }
-  #prototipi.is-visible { animation: neonGlow 3s infinite alternate; }
-  #prototipi .mono-tag { color: var(--glow); text-shadow: 0 0 8px rgba(244,184,96,0.6); }
-
-  @keyframes neonGlow {
-    0% { box-shadow: inset 0 0 30px rgba(58, 139, 255, 0.05); }
-    100% { box-shadow: inset 0 0 60px rgba(244, 184, 96, 0.15); }
-  }
-
-  /* Pulsanti */
-  .btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 16px 40px; border: 1px solid var(--ink); color: var(--ink);
-    font-weight: 700; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase;
-    cursor: pointer; transition: background .3s, color .3s, box-shadow .3s; margin-top: 30px; text-decoration: none;
-  }
+  .btn { display: inline-flex; align-items: center; padding: 16px 40px; border: 1px solid var(--ink); color: var(--ink); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: background .3s; margin-top: 30px; text-decoration: none; }
   .btn:hover { background: var(--ink); color: var(--night); }
-  .btn-glow { border-color: var(--glow); color: var(--glow); }
-  .btn-glow:hover { background: var(--glow); color: var(--night); box-shadow: 0 0 20px rgba(244,184,96,0.4); }
-
-  /* Struttura Grid */
+  
   .grid-display { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: 40px; }
-  .grid-item { border-left: 2px solid var(--line); padding-left: 20px; transition: border-color 0.8s ease, background-color 0.3s; }
-  #prototipi.is-visible .grid-item:nth-child(1) { border-color: var(--steel); }
-  #prototipi.is-visible .grid-item:nth-child(2) { border-color: var(--glow); }
-  .grid-item:hover { background-color: rgba(255,255,255,0.02); }
+  .grid-item { border-left: 2px solid var(--line); padding-left: 20px; }
   .grid-item h3 { font-size: 1.25rem; text-transform: uppercase; margin-bottom: 8px; }
   .grid-item p { color: var(--ink-soft); font-size: 0.95rem; max-width: 42ch; line-height: 1.5; }
-
-  /* Altre Sezioni (Mantenute pulite in stile scuro) */
+  
   #eventi { background-image: linear-gradient(to top, rgba(3,5,10,0.95), rgba(3,5,10,0.6)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1920&auto=format&fit=crop'); }
   #partecipa { background-image: linear-gradient(to top, rgba(3,5,10,0.95), rgba(3,5,10,0.7)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1920&auto=format&fit=crop'); }
 
-  /* Footer */
   footer { background: var(--night); padding: 60px 40px; border-top: 1px solid var(--line); font-size: 0.75rem; font-family: 'Space Mono', monospace; color: var(--ink-soft); }
-  .foot-wrap { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-  .foot-links { display: flex; gap: 25px; }
-  .foot-links a { text-transform: uppercase; color: var(--ink); text-decoration: none; }
+  .foot-wrap { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
 
   /* ==========================================================================
-     MEDIA QUERY PER DISPOSITIVI MOBILE (OTTIMIZZAZIONE COPERTINE E LAYOUT)
+     OTTIMIZZAZIONE RESPONSIVE VERSIONE B: TEXT OVERLAY MINIMAL (MOBILE)
      ========================================================================== */
   @media(max-width: 768px) {
     .nav { padding: 0 20px; height: 65px; }
-    .nav-links { display: none; } /* Su smartphone nascondiamo i link della nav per fare spazio al logo */
-    .brand-link svg { height: 35px; } /* Scaliamo il logo per non farlo uscire dai bordi */
-    
-    .container { padding: 0 20px; } /* Riduciamo i margini per dare più spazio ai testi */
+    .nav-links { display: none; }
+    .brand-link svg { height: 35px; }
+    .container { padding: 0 20px; }
     
     .section-hero {
-      padding-top: 100px;
-      padding-bottom: 60px;
-      background-position: center center; /* Forza la centratura matematica dell'immagine */
+      min-height: 100vh;
+      padding-top: 45vh; /* Spinge il testo nella metà inferiore del telefono */
+      padding-bottom: 40px;
     }
-
-    /* Ottimizzazione Specifica delle Immagini su Mobile per non tagliarle male */
-    #hero-caverna {
-      background-position: 65% center; /* Sposta leggermente l'inquadratura per mostrare le catene e il fuoco anche in verticale */
-    }
-    #filosofia {
-      background-position: center center;
-    }
-    #prototipi {
-      background-position: 40% center; /* Centra il focus sul Rover e sul Drone evitando che vengano tagliati fuori dallo schermo stretto */
-    }
-
-    /* Ricalibrazione della tipografia per evitare supercazzole visive */
-    h1, h2 { font-size: 1.85rem; line-height: 1.1; }
-    .sub-text { font-size: 1rem; margin-top: 15px; }
-    .btn { width: 100%; justify-content: center; padding: 14px 20px; margin-top: 25px; } /* I bottoni diventano "Full Width", molto più facili da cliccare con il pollice */
-
-    /* Trasformiamo la Bento Grid in un flusso verticale a colonna singola */
-    .grid-display { grid-template-columns: 1fr; gap: 30px; margin-top: 30px; }
-    .grid-item { padding-left: 15px; }
-    .grid-item p { max-width: 100%; }
     
-    .foot-wrap { flex-direction: column; align-items: flex-start; gap: 15px; }
+    /* Sfumatura nera molto aggressiva per proteggere i testi in basso, lasciando la foto pulita in alto */
+    .section-hero::before {
+      background: linear-gradient(to top, rgba(3,5,10,1) 0%, rgba(3,5,10,0.95) 50%, rgba(3,5,10,0.2) 85%, rgba(3,5,10,0) 100%);
+    }
+
+    /* Allineamento strategico delle immagini di sfondo su mobile */
+    #hero-caverna { background-position: 65% top; background-size: cover; }
+    #filosofia { background-position: center top; background-size: cover; }
+    #prototipi { background-position: 35% top; background-size: cover; }
+
+    /* Riduzione dritta dei testi per liberare spazio visivo */
+    h1, h2 { font-size: 1.5rem; line-height: 1.15; }
+    .sub-text { font-size: 0.9rem; margin-top: 10px; line-height: 1.4; }
+    .btn { width: 100%; justify-content: center; padding: 14px 20px; margin-top: 20px; }
+    
+    .grid-display { grid-template-columns: 1fr; gap: 20px; margin-top: 25px; }
+    .foot-wrap { flex-direction: column; gap: 15px; align-items: flex-start; }
   }
 </style>
 </head>
@@ -204,8 +145,8 @@
     <nav class="nav-links">
       <a href="#filosofia">Filosofia</a>
       <a href="#prototipi">Prototipi</a>
-      <a href="#eventi">Eventi</a>
-      <a href="#partecipa">Unisciti</a>
+      <a href="#eventi">Network</a>
+      <a href="#partecipa">Collabora</a>
     </nav>
   </div>
 </header>
@@ -240,7 +181,7 @@
       </div>
       <div class="grid-item">
         <h3>02 / Drone da Monitoraggio</h3>
-        <p>Vettore aereo per la ricognizione rapida. Progettato per decolli istantanei in scenari critici, invia telemetria e flussi video in tempo reale per supportare i soccorsi ed eliminare gli errori di valutazione visiva durante le emergenze.</p>
+        <p>Vettore aereo per la ricognizione rapida. Progettato per decolli istantanei in scenari critici, invia telemetria e flussi video in tempo reale per supportare i soccorsi ed eliminare gli errori di valutazione visiva durante delle emergenze.</p>
       </div>
     </div>
   </div>
@@ -259,7 +200,7 @@
     <span class="mono-tag">// COLLABORA CON IL LABORATORIO</span>
     <h2>Sviluppa il futuro della robotica con noi.</h2>
     <p class="sub-text">Siamo aperti alla collaborazione con ingegneri, programmatori, installatori e aziende partner. Se vuoi contribuire allo sviluppo dei nostri vettori hardware o testare le nostre soluzioni industriali sul campo, entra in contatto con il laboratorio.</p>
-    <a href="mailto:info@caveroboticslab.it" class="btn btn-glow">Contatta il Team</a>
+    <a href="mailto:info@caveroboticslab.it" class="btn">Contatta il Team</a>
   </div>
 </section>
 
@@ -267,11 +208,9 @@
   <div class="foot-wrap">
     <div>
       <p>© 2026 CAVE ROBOTICS LAB APS — ROBOTICA INDUSTRIALE OPEN-SOURCE</p>
-      <p style="margin-top: 5px; opacity: 0.5;">ETS ai sensi del D.Lgs. 117/2017 · Sede Legale: Italia</p>
     </div>
     <div class="foot-links">
       <a href="mailto:info@caveroboticslab.it">Contatti</a>
-      <a href="#top">Top ↑</a>
     </div>
   </div>
 </footer>
@@ -279,17 +218,10 @@
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const sections = document.querySelectorAll(".class-fade");
-    const observerOptions = { root: null, rootMargin: "0px", threshold: 0.10 };
-
-    const observer = new IntersectionObserver(function(entries, observer) {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-        }
-      });
-    }, observerOptions);
-
-    sections.forEach(section => { observer.observe(section); });
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("is-visible"); });
+    }, { threshold: 0.10 });
+    sections.forEach(section => observer.observe(section));
   });
 </script>
 
