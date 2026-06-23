@@ -18,7 +18,7 @@
     --ink: #ffffff;
     --ink-soft: #8a99ad;
     --steel: #3A8BFF;
-    --line: rgba(255, 255, 255, 0.1);
+    --line: rgba(255, 255, 255, 0.05);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,17 +35,20 @@
   /* ---------- NAV STILE SPACEX ---------- */
   header {
     position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-    background: linear-gradient(to bottom, rgba(3,5,10,0.8), transparent);
+    background: linear-gradient(to bottom, rgba(3,5,10,0.95), transparent);
     backdrop-filter: blur(5px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   }
-  .nav { display: flex; align-items: center; justify-content: space-between; height: 80px; max-width: 1400px; margin: 0 auto; padding: 0 40px; }
-  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.1em; text-transform: uppercase; }
-  .brand svg { width: 28px; height: 28px; }
-  .nav-links { display: flex; gap: 35px; align-items: center; }
-  .nav-links a { font-size: .85rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink); transition: opacity .2s; }
-  .nav-links a:hover { opacity: 0.7; color: var(--glow); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 90px; max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+  
+  .brand-link { display: flex; align-items: center; text-decoration: none; transition: transform 0.2s ease; }
+  .brand-link svg { display: block; height: 50px; width: auto; }
 
-  /* ---------- SEZIONI CORPO BLOCCO (SpaceX Style) ---------- */
+  .nav-links { display: flex; gap: 35px; align-items: center; }
+  .nav-links a { font-size: .85rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink); transition: opacity .2s, color .2s; }
+  .nav-links a:hover { color: var(--glow); }
+
+  /* ---------- SEZIONI CORPO BLOCCO (Scroll Reveal & SpaceX Design) ---------- */
   .section-hero {
     position: relative;
     height: 100vh;
@@ -58,32 +61,72 @@
     overflow: hidden;
   }
   
-  .section-hero::before {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(3,5,10,0.95) 15%, rgba(3,5,10,0.3) 60%, rgba(3,5,10,0.5) 100%);
-    z-index: 1;
+  /* Animazione fluida di comparsa allo scroll */
+  .fade-in-section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .container { position: relative; z-index: 2; width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 40px; }
   
-  .mono-tag { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--glow); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 15px; display: block; }
+  .mono-tag { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--ink-soft); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 15px; display: block; }
   h1, h2 { font-size: clamp(2.3rem, 5.5vw, 4.2rem); font-weight: 700; text-transform: uppercase; line-height: 0.95; letter-spacing: -0.03em; max-width: 18ch; }
   .sub-text { font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--ink-soft); margin-top: 20px; max-width: 55ch; font-weight: 400; line-height: 1.4; }
 
+  /* ---------- SFONDI SEZIONI CON IMMAGINI LOCALI VALIDATE ---------- */
+  
+  /* Sezione 1: Caverna di Platone Immagine Custom */
+  #hero-caverna {
+    background-image: linear-gradient(to top, rgba(3,5,10,0.95) 15%, rgba(3,5,10,0.3) 60%, rgba(3,5,10,0.5) 100%), url('caverna.jpg');
+  }
+
+  /* Sezione 2: Filosofia - Umanizzazione e Inclusione */
+  #filosofia {
+    background-image: linear-gradient(to top, rgba(3,5,10,0.95) 20%, rgba(3,5,10,0.4)), url('tecnologia che unisce.png');
+  }
+  #filosofia.is-visible .mono-tag { color: var(--steel); }
+
+  /* Sezione 3: Prototipi - L'esplosione Flashy */
+  #prototipi {
+    background-image: linear-gradient(to top, rgba(3,5,10,0.98) 10%, rgba(3,5,10,0.3)), url('Prototipi.png');
+    border-top: 1px solid rgba(58, 139, 255, 0.1);
+    border-bottom: 1px solid rgba(244, 184, 96, 0.1);
+  }
+  #prototipi.is-visible { animation: neonGlow 3s infinite alternate; }
+  #prototipi .mono-tag { color: var(--glow); text-shadow: 0 0 8px rgba(244,184,96,0.6); }
+
+  @keyframes neonGlow {
+    0% { box-shadow: inset 0 0 30px rgba(58, 139, 255, 0.05); }
+    100% { box-shadow: inset 0 0 60px rgba(244, 184, 96, 0.15); }
+  }
+
+  /* Bottoni e Strutture Grid */
   .btn {
     display: inline-flex; align-items: center; gap: 10px;
     padding: 16px 40px; border: 1px solid var(--ink); color: var(--ink);
     font-weight: 700; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase;
-    cursor: pointer; transition: background .3s, color .3s; margin-top: 30px;
+    cursor: pointer; transition: background .3s, color .3s, box-shadow .3s; margin-top: 30px;
   }
   .btn:hover { background: var(--ink); color: var(--night); }
   .btn-glow { border-color: var(--glow); color: var(--glow); }
-  .btn-glow:hover { background: var(--glow); color: var(--night); }
+  .btn-glow:hover { background: var(--glow); color: var(--night); box-shadow: 0 0 20px rgba(244,184,96,0.4); }
 
   .grid-display { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: 50px; }
-  .grid-item { border-left: 1px solid var(--line); padding-left: 20px; }
+  .grid-item { border-left: 2px solid var(--line); padding-left: 20px; transition: border-color 0.8s ease, background-color 0.3s; }
+  #prototipi.is-visible .grid-item:nth-child(1) { border-color: var(--steel); }
+  #prototipi.is-visible .grid-item:nth-child(2) { border-color: var(--glow); }
+  .grid-item:hover { background-color: rgba(255,255,255,0.02); }
   .grid-item h3 { font-size: 1.3rem; text-transform: uppercase; margin-bottom: 10px; }
-  .grid-item p { color: var(--ink-soft); font-size: 0.95rem; max-width: 40ch; }
+  .grid-item p { color: var(--ink-soft); font-size: 0.95rem; max-width: 40ch; line-height: 1.5; }
+
+  /* Sezioni Successive (Stock per ora mantenute oscurate) */
+  #eventi { background-image: linear-gradient(to top, rgba(3,5,10,0.95), rgba(3,5,10,0.6)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1920&auto=format&fit=crop'); }
+  #partecipa { background-image: linear-gradient(to top, rgba(3,5,10,0.95), rgba(3,5,10,0.7)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1920&auto=format&fit=crop'); }
 
   footer { background: var(--night); padding: 60px 40px; border-top: 1px solid var(--line); font-size: 0.75rem; font-family: 'Space Mono', monospace; color: var(--ink-soft); }
   .foot-wrap { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
@@ -98,15 +141,29 @@
 </head>
 <body>
 
+<div id="top"></div>
+
 <header>
   <div class="wrap nav">
-    <a href="#top" class="brand">
-      <svg viewBox="0 0 36 36" fill="none">
-        <rect x="2" y="2" width="32" height="32" rx="4" stroke="#ffffff" stroke-width="2"/>
-        <path d="M12 24 V16 Q12 10 18 10 Q24 10 24 16 V24" stroke="#F4B860" stroke-width="2" fill="none"/>
-        <circle cx="18" cy="16" r="2" fill="#3A8BFF"/>
+    <a href="#top" class="brand-link">
+      <svg viewBox="60 10 560 200" xmlns="http://www.w3.org/2000/svg">
+        <text x="90" y="155" font-family="'Space Grotesk', sans-serif" font-size="110" font-weight="800" fill="#ffffff" letter-spacing="-2">C</text>
+        <path d="M198,158 L234,52 L254,52 L254,70 L228,158 Z" fill="#ffffff"/>
+        <path d="M362,158 L338,70 L338,52 L358,52 L394,158 Z" fill="#ffffff"/>
+        <path d="M234,52 Q246,36 296,32 Q346,36 358,52 L338,52 Q330,44 296,41 Q262,44 254,52 Z" fill="#ffffff"/>
+        <path d="M258,150 L267,105 Q296,88 325,105 L334,150 Z" fill="#03050a"/>
+        <path d="M256,72 Q296,48 336,72 L325,105 Q296,88 267,105 Z" fill="#03050a"/>
+        <radialGradient id="glow2" cx="50%" cy="65%" r="55%">
+          <stop offset="0%" stop-color="#FFE8A0" stop-opacity="1"/>
+          <stop offset="35%" stop-color="#F4B860" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#03050a" stop-opacity="0"/>
+        </radialGradient>
+        <ellipse cx="296" cy="115" rx="42" ry="38" fill="url(#glow2)"/>
+        <ellipse cx="296" cy="112" rx="5" ry="5" fill="#FFFFFF"/>
+        <rect x="246" y="118" width="100" height="9" rx="3" fill="#ffffff"/>
+        <text x="398" y="155" font-family="'Space Grotesk', sans-serif" font-size="110" font-weight="800" fill="#ffffff" letter-spacing="-2">VE</text>
+        <text x="90" y="196" font-family="'Space Grotesk', sans-serif" font-size="34" font-weight="700" fill="#F4B860" letter-spacing="38.5">ROBOTICS</text>
       </svg>
-      CaveRobotics
     </a>
     <nav class="nav-links">
       <a href="#filosofia">Filosofia</a>
@@ -117,7 +174,7 @@
   </div>
 </header>
 
-<section id="top" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1581092334651-ddf26d9aae9d?q=80&w=1920&auto=format&fit=crop');">
+<section id="hero-caverna" class="section-hero class-fade">
   <div class="container">
     <span class="mono-tag">// APS ETS · DALLE OMBRE ALLA LUCE</span>
     <h1>Una Robotica Umanistica.</h1>
@@ -126,7 +183,7 @@
   </div>
 </section>
 
-<section id="filosofia" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=1920&auto=format&fit=crop');">
+<section id="filosofia" class="section-hero class-fade">
   <div class="container">
     <span class="mono-tag">// LA NOSTRA FILOSOFIA</span>
     <h2>Tecnologia che libera e include.</h2>
@@ -134,7 +191,7 @@
   </div>
 </section>
 
-<section id="prototipi" class="section-hero" style="background-image: url('https://test-bucket-image-generation.s3.amazonaws.com/generated_images/input_file_0.png');">
+<section id="prototipi" class="section-hero class-fade">
   <div class="container">
     <span class="mono-tag">// AREA COSTRUZIONE & OPERAZIONI</span>
     <h2>I Prototipi in via di Sviluppo.</h2>
@@ -153,7 +210,7 @@
   </div>
 </section>
 
-<section id="eventi" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1920&auto=format&fit=crop');">
+<section id="eventi" class="section-hero class-fade">
   <div class="container">
     <span class="mono-tag">// IMPATTO SOCIALE & DIVULGAZIONE</span>
     <h2>Eventi, FabLab e Comunità.</h2>
@@ -172,7 +229,7 @@
   </div>
 </section>
 
-<section id="partecipa" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1920&auto=format&fit=crop');">
+<section id="partecipa" class="section-hero class-fade">
   <div class="container">
     <span class="mono-tag">// UNISCITI AL LABORATORIO</span>
     <h2>Costruisci una Robotica Umanistica.</h2>
@@ -193,6 +250,23 @@
     </div>
   </div>
 </footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const sections = document.querySelectorAll(".class-fade");
+    const observerOptions = { root: null, rootMargin: "0px", threshold: 0.15 };
+
+    const observer = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => { observer.observe(section); });
+  });
+</script>
 
 </body>
 </html>
